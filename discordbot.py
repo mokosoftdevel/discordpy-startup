@@ -2,6 +2,7 @@ from discord.ext import commands
 import os
 import traceback
 import random
+import discord
 
 bot = commands.Bot(command_prefix='/')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -35,6 +36,14 @@ async def roll(ctx):
 async def massa(ctx):
     await ctx.send('<:Massa:761401088540672010> <:uruse:760475866626785342>')
 
+
+@bot.event()
+async def on_message(message):
+    await bot.process_commands(message)
+    if message.author.bot:
+        return
+    if 'うんこ' in message.content:
+        await message.channel.send('なに？')
 
 
 bot.run(token)
