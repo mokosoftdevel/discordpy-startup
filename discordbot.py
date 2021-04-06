@@ -4,7 +4,7 @@ import traceback
 import random
 import discord
 
-bot = commands.Bot(command_prefix='/')
+bot = commands.Bot(command_prefix='うんこ')
 token = os.environ['DISCORD_BOT_TOKEN']
 
 
@@ -19,14 +19,26 @@ async def on_message(message):
     await bot.process_commands(message)
     if message.author.bot:
         return
+    if message.content.startswith('うんこ'):
+        return
     if 'うんこ' in message.content:
         await message.add_reaction('💩')
         await message.channel.send('なに？')
 
 
+@bot.command()
+async def ヘルプ(ctx):
+    await ctx.send("""うんこって誰 : わいが返事するで
+
+うんこねむい : 眠気をはかるで
+
+うんこどう : うんこの状態を教えるで
+
+うんこmassa : Massaを罵倒するで
+""")
 
 @bot.command()
-async def ping(ctx):
+async def って誰(ctx):
     await ctx.send('わいや')
 
 
@@ -37,7 +49,7 @@ async def ねむい(ctx):
 
 
 @bot.command()
-async def roll(ctx):
+async def どう(ctx):
     rand_int = random.randint(0,100)
     await ctx.send(f"{ctx.author.mention}"+' うんこのかんじは '+str(rand_int)+' やな' )
 
