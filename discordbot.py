@@ -24,5 +24,12 @@ async def roll(ctx):
     await ctx.send('うんこのかんじは '+str(rand_int)+' やな')
 
 
+@bot.command()
+async def massa(ctx):
+    await ctx.send(':Massa::uruse:')
+
+
+
+
 
 bot.run(token)
