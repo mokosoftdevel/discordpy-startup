@@ -21,12 +21,12 @@ async def ping(ctx):
 @bot.command()
 async def roll(ctx):
     rand_int = random.randint(0,100)
-    await ctx.send('うんこのかんじは '+str(rand_int)+' やな')
+    await ctx.send(f"{ctx.author.mention}"+' うんこのかんじは '+str(rand_int)+' やな' )
 
 
 @bot.command()
 async def massa(ctx):
-    await ctx.send(':Massa: :uruse:')
+    await ctx.send('<:Massa:> <:uruse:>')
 
 
 
