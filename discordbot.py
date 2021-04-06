@@ -26,7 +26,7 @@ async def roll(ctx):
 
 @bot.command()
 async def massa(ctx):
-    await ctx.send(':Massa::uruse:')
+    await ctx.send(':Massa: :uruse:')
 
 
 
