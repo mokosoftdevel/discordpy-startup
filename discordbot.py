@@ -20,6 +20,7 @@ async def on_message(message):
     if message.author.bot:
         return
     if 'うんこ' in message.content:
+        await message.add_reaction('💩')
         await message.channel.send('なに？')
 
 
