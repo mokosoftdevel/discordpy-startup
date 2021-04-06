@@ -14,6 +14,15 @@ async def on_command_error(ctx, error):
     error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
     await ctx.send(error_msg)
 
+@bot.event
+async def on_message(message):
+    await bot.process_commands(message)
+    if message.author.bot:
+        return
+    if 'うんこ' in message.content:
+        await message.channel.send('なに？')
+
+
 
 @bot.command()
 async def ping(ctx):
@@ -37,13 +46,6 @@ async def massa(ctx):
     await ctx.send('<:Massa:761401088540672010> <:uruse:760475866626785342>')
 
 
-@bot.event()
-async def on_message(message):
-    await bot.process_commands(message)
-    if message.author.bot:
-        return
-    if 'うんこ' in message.content:
-        await message.channel.send('なに？')
 
 
 bot.run(token)
