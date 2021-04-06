@@ -36,8 +36,5 @@ async def massa(ctx):
     await ctx.send('<:Massa:761401088540672010> <:uruse:760475866626785342>')
 
 
-　
-
-
 
 bot.run(token)
