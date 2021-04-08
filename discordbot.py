@@ -82,7 +82,7 @@ async def ping(ctx):
     await ctx.send(f"{ctx.author.mention}"+' うんこのかんじは '+str(rand_int)+' やな' )
 
 
-@bot.command(aliases=['massa','Massa','まっさ'])
+@bot.command(aliases=['massa','まっさ'])
 async def massa(ctx):
     await ctx.send('<:Massa:761401088540672010> <:uruse:760475866626785342>')
 
