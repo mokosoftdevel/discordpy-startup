@@ -40,7 +40,7 @@ async def ヘルプ(ctx):
 
 うんこmassa : Massaを罵倒するで
 
-うんこ何食べよ？ : 食べるものを提案するよ
+うんこ何食べよ : 食べるものを提案するよ
 """)
 
 @bot.command()
@@ -81,7 +81,7 @@ async def massa(ctx):
 
 
 @bot.command()
-async def 何食べよ？(ctx):
+async def 何食べよ(ctx):
     rand_int = random.randint(1,10)
     mes = ''
     if rand_int == 1:
