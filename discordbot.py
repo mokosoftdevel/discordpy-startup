@@ -39,6 +39,8 @@ async def ヘルプ(ctx):
 うんこどう : うんこの状態を教えるで
 
 うんこmassa : Massaを罵倒するで
+
+うんこ何食べよ？ : 食べるものを提案するよ
 """)
 
 @bot.command()
@@ -76,6 +78,33 @@ async def どう(ctx):
 @bot.command()
 async def massa(ctx):
     await ctx.send('<:Massa:761401088540672010> <:uruse:760475866626785342>')
+
+
+@bot.command()
+async def 何食べよ？(ctx):
+    rand_int = random.randint(1,10)
+    mes = ''
+    if rand_int == 1:
+        mes = 'んーーそやな、パスタとかどう？'
+    if rand_int == 2:
+        mes = '今日はあれやで、中華やろ'
+    if rand_int == 3:
+        mes = 'ここは一発焼肉で！'
+    if rand_int == 4:
+        mes = 'なんちゅうか、パン食いたくない？'
+    if rand_int == 5:
+        mes = 'ピッツァ'
+    if rand_int == 6:
+        mes = 'やっぱ和食よねっ'
+    if rand_int == 7:
+        mes = 'ラーメンいっとこ！'
+    if rand_int == 8:
+        mes = '食べたらあかん'
+    if rand_int == 9:
+        mes = 'スープ　スープだけ'
+    if rand_int == 10:
+        mes = 'コンビニでええんちゃう'
+    await ctx.send(f"{ctx.author.mention}"+' '+mes)
 
 
 
