@@ -28,6 +28,11 @@ async def on_message(message):
     if 'うんこ' in message.content:
         await message.add_reaction('💩')
         await message.channel.send('なに？')
+    if 'くそ' in message.content or 'クソ' in message.content:
+        await message.add_reaction('💩')
+        await message.channnel.send('なんや？')
+    if 'くさい' in message.content or '臭い' in message.content:
+        await message.channnel.send('臭いのわいちゃうで？')
 
 
 @bot.command()
@@ -36,20 +41,22 @@ async def ヘルプ(ctx):
 
 うんこねむい : 眠気をはかるで
 
-うんこどう : うんこの状態を教えるで
+うんこどう？ : うんこの状態を教えるで
 
 うんこmassa : Massaを罵倒するで
 
 うんこ何食べよ : 食べるものを提案するよ
+
+うんこおはよう : 占い
 """)
 
-@bot.command()
-async def って誰(ctx):
+@bot.command(aliases=['だれ','だれ？','誰','誰？'])
+async def com_dare(ctx):
     await ctx.send('わいや')
 
 
-@bot.command()
-async def ねむい(ctx):
+@bot.command(aliases=['ねむい','眠い'])
+async def com_nemui(ctx):
     rand_int = random.randint(0,100)
     nemu_mes = ''
     if rand_int <= 5:
@@ -66,22 +73,22 @@ async def ねむい(ctx):
         nemu_mes = 'いやもう寝たほうがいいでそろそろ'
     if rand_int > 90:
         nemu_mes = 'あかんあかん、もう寝ぇ！！！！'
-    await ctx.send(f"{ctx.author.mention}"+' '+nemu_mes )
+    await ctx.send(f"{ctx.author.mention}"+' '+nemu_mes+' ('+str(rand_int)+')' )
 
 
-@bot.command()
-async def どう(ctx):
+@bot.command(aliases=['どう？','どう'])
+async def ping(ctx):
     rand_int = random.randint(0,100)
     await ctx.send(f"{ctx.author.mention}"+' うんこのかんじは '+str(rand_int)+' やな' )
 
 
-@bot.command()
+@bot.command(aliases=['massa','Massa','まっさ'])
 async def massa(ctx):
     await ctx.send('<:Massa:761401088540672010> <:uruse:760475866626785342>')
 
 
-@bot.command()
-async def 何食べよ(ctx):
+@bot.command(aliases=['何食べよ','何食べよ？'])
+async def com_tabeyo(ctx):
     rand_int = random.randint(1,10)
     mes = ''
     if rand_int == 1:
@@ -106,6 +113,22 @@ async def 何食べよ(ctx):
         mes = 'コンビニでええんちゃう'
     await ctx.send(f"{ctx.author.mention}"+' '+mes)
 
+
+@bot.command(aliases=['おはよう'])
+async def com_ohayo(ctx):
+    rand_int = random.randint(1,5)
+    mes = ''
+    if rand_int == 1:
+        mes = 'おはよー　あんさん今日は"うん"がありまっせ'
+    if rand_int == 2:
+        mes = 'おはようさん　今日はくっさい一日ですわ'
+    if rand_int == 3:
+        mes = '朝からなんや、ため息が"もれとる"で'
+    if rand_int == 4:
+        mes = 'すごい！うんこだけに"大"吉やっ！！！'
+    if rand_int == 5:
+        mes = 'お前は普通'
+    await ctx.send(f"{ctx.author.mention}"+' '+mes)
 
 
 
