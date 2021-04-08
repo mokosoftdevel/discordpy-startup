@@ -21,7 +21,7 @@ async def on_message(message):
         return
     if message.content != 'うんこ' and message.content.startswith('うんこ'):
         return
-    if message.content.endswith != 'うん':
+    if message.content.endswith == 'うん':
         await message.add_reaction('💩')
         await message.channel.send('こ')
         return
