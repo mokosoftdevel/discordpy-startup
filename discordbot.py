@@ -30,9 +30,9 @@ async def on_message(message):
         await message.channel.send('なに？')
     if 'くそ' in message.content or 'クソ' in message.content:
         await message.add_reaction('💩')
-        await message.channnel.send('なんや？')
+        await message.channel.send('なんや？')
     if 'くさい' in message.content or '臭い' in message.content:
-        await message.channnel.send('臭いのわいちゃうで？')
+        await message.channel.send('臭いのわいちゃうで？')
 
 
 @bot.command()
