@@ -131,5 +131,10 @@ async def com_ohayo(ctx):
     await ctx.send(f"{ctx.author.mention}"+' '+mes)
 
 
+@bot.command(aliases=['お知らせ'])
+async def com_osirase(ctx):
+    await ctx.send('@everyone はいはいみんな '+f"{ctx.author.mention}"+' が言いたいことがあるらしいで、ちょっと静かにしたってな、はいどうぞ')
+    
+
 
 bot.run(token)
