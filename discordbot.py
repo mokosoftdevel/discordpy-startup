@@ -17,6 +17,9 @@ unko_messages = []
 # ねむいlist
 unko_nemui = []
 
+# おはよう
+unko_ohayo = []
+
 
 
 
@@ -42,6 +45,7 @@ gc = gspread.authorize(credentials)
 wb = gc.open_by_key(sheet)
 sheet_messages = wb.worksheet('messages')
 sheet_uranai = wb.worksheet('uranai')
+sheet_ohayou = wb.worksheet('ohayou')
 
 
 
@@ -149,18 +153,8 @@ async def com_tabeyo(ctx):
 
 @bot.command(aliases=['おはよう'])
 async def com_ohayo(ctx):
-    rand_int = random.randint(1,5)
-    mes = ''
-    if rand_int == 1:
-        mes = 'おはよー　あんさん今日は"うん"がありまっせ'
-    if rand_int == 2:
-        mes = 'おはようさん　今日はくっさい一日ですわ'
-    if rand_int == 3:
-        mes = '朝からなんや、ため息が"もれとる"で'
-    if rand_int == 4:
-        mes = 'すごい！うんこだけに"大"吉やっ！！！'
-    if rand_int == 5:
-        mes = 'お前は普通'
+    global unko_ohayo
+    mes = random.choice(unko_ohayo)
     await ctx.send(f"{ctx.author.mention}"+' '+mes)
 
 
@@ -171,12 +165,13 @@ async def com_osirase(ctx):
 
 @bot.command(aliases=['りろーど','リロード'])
 async def com_reload(ctx):
-    await ctx.send('読み込みます')
+    await ctx.send('読み込むでー')
     await func_get_unko_message_spreadsheet()
     await func_get_unko_nemui_spreadsheet()
-    global unko_messages
-    print(unko_messages)
-    await ctx.send('読み込みました')
+    await func_get_unko_ohayo_spreadsheet()
+    # global unko_messages
+    # print(unko_messages)
+    await ctx.send('読み込みんだで！おおきに！')
 
 
 
@@ -212,7 +207,14 @@ async def func_get_unko_nemui_spreadsheet():
         for vcell in ranges[start : start + column_size]:
             values.append(vcell.value)
         unko_nemui.append(values)
-    
+
+async def func_get_unko_ohayo_spreadsheet():
+    global unko_ohayo
+    unko_ohayo.clear()
+    last_line = int(sheet_ohayou.cell(1,2).value)
+    ranges = sheet_uranai.range(3,1,last_line,1)
+    for vcell in ranges:
+        unko_ohayo.append(vcell.value)
 
     
 
@@ -226,5 +228,6 @@ async def func_get_unko_nemui_spreadsheet():
 # spreadsheet から設定を読み込む
 bot.loop.create_task(func_get_unko_message_spreadsheet())
 bot.loop.create_task(func_get_unko_nemui_spreadsheet())
+bot.loop.create_task(func_get_unko_ohayo_spreadsheet())
 
 bot.run(token)
