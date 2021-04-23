@@ -30,18 +30,18 @@ async def on_message(message):
     global unko_messages
     for line in unko_messages:
         if line[0] == 'end':
-            if message.content.endswith(list[1]):
-                if int(list[3]) == 1:
-                    await message.add_reaction(list[4])
-                if len(list[2]) > 0:
-                    await message.channel.send(list[2])
+            if message.content.endswith(line[1]):
+                if int(line[3]) == 1:
+                    await message.add_reaction(line[4])
+                if len(line[2]) > 0:
+                    await message.channel.send(line[2])
                 return
         elif line[0] == 'find':
             if line[1] in message.content:
-                if int(list[3]) == 1:
-                    await message.add_reaction(list[4])
-                if len(list[2]) > 0:
-                    await message.channel.send(list[2])
+                if int(line[3]) == 1:
+                    await message.add_reaction(line[4])
+                if len(line[2]) > 0:
+                    await message.channel.send(line[2])
                 return
         
 
