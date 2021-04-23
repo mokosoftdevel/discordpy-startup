@@ -238,7 +238,7 @@ async def func_get_unko_message_spreadsheet():
 
 
 
-
-bot.loop.create_task(func_get_unko_message_localhost())
+# spreadsheet から設定を読み込む
+bot.loop.create_task(func_get_unko_message_spreadsheet())
 
 bot.run(token)
