@@ -14,6 +14,8 @@ token = os.environ['DISCORD_BOT_TOKEN']
 # うんこの受け答えlist
 unko_messages = []
 
+# ねむいlist
+unko_nemui = []
 
 
 
@@ -39,12 +41,7 @@ credentials = ServiceAccountCredentials.from_json_keyfile_dict(credential, scope
 gc = gspread.authorize(credentials)
 wb = gc.open_by_key(sheet)
 sheet_messages = wb.worksheet('messages')
-
-
-
-
-
-
+sheet_uranai = wb.worksheet('uranai')
 
 
 
@@ -79,21 +76,6 @@ async def on_message(message):
                 return
         
 
-    """
-    if message.content.endswith('うん'):
-        await message.add_reaction('💩')
-        await message.channel.send('こ')
-        return
-    if 'うんこ' in message.content:
-        await message.add_reaction('💩')
-        await message.channel.send('なに？')
-    if 'くそ' in message.content or 'クソ' in message.content:
-        await message.add_reaction('💩')
-        await message.channel.send('なんや？')
-    if 'くさい' in message.content or '臭い' in message.content:
-        await message.channel.send('臭いのわいちゃうで？')
-    """
-
 
 @bot.command()
 async def ヘルプ(ctx):
@@ -119,20 +101,11 @@ async def com_dare(ctx):
 async def com_nemui(ctx):
     rand_int = random.randint(0,100)
     nemu_mes = ''
-    if rand_int <= 5:
-        nemu_mes = 'いやいや、きみめっちゃ目ぱっちりやん'
-    if rand_int > 5 and rand_int <=15:
-        nemu_mes = 'ねむそうには全然みえへんけど？'
-    if rand_int > 15 and rand_int <= 30:
-        nemu_mes = 'みんなねむいのは同じやから我慢し'
-    if rand_int > 30 and rand_int <= 60:
-        nemu_mes = 'この時間はねむなるよなぁ レッドブルきめよか！'
-    if rand_int > 60 and rand_int <= 80:
-        nemu_mes = '自分もう眠そうな顔してるで'
-    if rand_int > 80 and rand_int <= 90:
-        nemu_mes = 'いやもう寝たほうがいいでそろそろ'
-    if rand_int > 90:
-        nemu_mes = 'あかんあかん、もう寝ぇ！！！！'
+    global unko_nemui
+    for line in unko_nemui:
+        if int(line[0]) <= rand_int and rand_int <= int(line[1]):
+            nemu_mes = line[2]
+            break
     await ctx.send(f"{ctx.author.mention}"+' '+nemu_mes+' ('+str(rand_int)+')' )
 
 
@@ -200,6 +173,7 @@ async def com_osirase(ctx):
 async def com_reload(ctx):
     await ctx.send('読み込みます')
     await func_get_unko_message_spreadsheet()
+    await func_get_unko_nemui_spreadsheet()
     global unko_messages
     print(unko_messages)
     await ctx.send('読み込みました')
@@ -226,7 +200,18 @@ async def func_get_unko_message_spreadsheet():
         for vcell in ranges[start : start + column_size]:
             values.append(vcell.value)
         unko_messages.append(values)
-    
+
+async def func_get_unko_nemui_spreadsheet():
+    global unko_nemui
+    unko_nemui.clear()
+    last_line = int(sheet_uranai.cell(1,2).value)
+    column_size = 3
+    ranges = sheet_uranai.range(3,1,last_line,column_size)
+    for start in range(0, len(ranges), column_size):
+        values = []
+        for vcell in ranges[start : start + column_size]:
+            values.append(vcell.value)
+        unko_nemui.append(values)
     
 
     
@@ -240,5 +225,6 @@ async def func_get_unko_message_spreadsheet():
 
 # spreadsheet から設定を読み込む
 bot.loop.create_task(func_get_unko_message_spreadsheet())
+bot.loop.create_task(func_get_unko_nemui_spreadsheet())
 
 bot.run(token)
