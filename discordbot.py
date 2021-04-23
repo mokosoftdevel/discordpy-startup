@@ -198,6 +198,7 @@ async def com_osirase(ctx):
 
 @bot.command(aliases=['りろーど','リロード'])
 async def com_reload(ctx):
+    await ctx.send('読み込みます')
     await func_get_unko_message_spreadsheet()
     global unko_messages
     await ctx.send('読み込みました')
