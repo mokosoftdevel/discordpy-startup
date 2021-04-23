@@ -219,10 +219,11 @@ async def func_get_unko_message_spreadsheet():
     unko_messages.clear()
     last_line = int(sheet_messages.cell(1,2).value)
     print(last_line)
-    ranges = sheet_messages.range(3,1,last_line,5)
-    for start in range(0, len(ranges), 5):
+    column_size = 5
+    ranges = sheet_messages.range(3,1,last_line,column_size)
+    for start in range(0, len(ranges), column_size):
         values = []
-        for vcell in range[start : start + 5]:
+        for vcell in ranges[start : start + column_size]:
             values.append(vcell.value)
         unko_messages.append(values)
     
