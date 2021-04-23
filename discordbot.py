@@ -211,6 +211,7 @@ async def func_get_unko_message_localhost():
     unko_messages.append(['end','うん','こ',1,'💩'])
     unko_messages.append(['find','うんこ','なに？',1,'💩'])
     unko_messages.append(['find','くそ','なんや？',1,'💢'])
+    print(unko_messages)
 
 async def func_get_unko_message_spreadsheet():
     global unko_messages
