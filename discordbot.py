@@ -34,11 +34,11 @@ credential = {
                 "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
                 "client_x509_cert_url":  os.environ['SHEET_CLIENT_X509_CERT_URL']
              }
-print(credential)
+# print(credential)
 credentials = ServiceAccountCredentials.from_json_keyfile_dict(credential, scope)
 gc = gspread.authorize(credentials)
 wb = gc.open_by_key(sheet)
-sheet_messages = wb.worksheet('messasges')
+sheet_messages = wb.worksheet('messages')
 
 
 
