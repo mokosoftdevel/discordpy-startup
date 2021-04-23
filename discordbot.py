@@ -187,7 +187,6 @@ async def func_get_unko_message_spreadsheet():
     global unko_messages
     unko_messages.clear()
     last_line = int(sheet_messages.cell(1,2).value)
-    print(last_line)
     column_size = 5
     ranges = sheet_messages.range(3,1,last_line,column_size)
     for start in range(0, len(ranges), column_size):
@@ -212,7 +211,7 @@ async def func_get_unko_ohayo_spreadsheet():
     global unko_ohayo
     unko_ohayo.clear()
     last_line = int(sheet_ohayou.cell(1,2).value)
-    ranges = sheet_uranai.range(3,1,last_line,1)
+    ranges = sheet_ohayou.range(3,1,last_line,1)
     for vcell in ranges:
         unko_ohayo.append(vcell.value)
 
