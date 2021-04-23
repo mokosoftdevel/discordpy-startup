@@ -215,8 +215,10 @@ async def func_get_unko_message_spreadsheet():
     global unko_messages
     unko_messages.clear()
     last_line = int(sheet_messages.cell(1,2).text)
+    print(last_line)
     ranges = sheet_messages.range(3,1,last_line,5)
     print(ranges)
+
     
 
 
