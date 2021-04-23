@@ -201,6 +201,7 @@ async def com_reload(ctx):
     await ctx.send('読み込みます')
     await func_get_unko_message_spreadsheet()
     global unko_messages
+    print(unko_messages)
     await ctx.send('読み込みました')
 
 
@@ -219,8 +220,12 @@ async def func_get_unko_message_spreadsheet():
     last_line = int(sheet_messages.cell(1,2).value)
     print(last_line)
     ranges = sheet_messages.range(3,1,last_line,5)
-    for v_cell in ranges:
-        print(v_cell.value)
+    for start in range(0, len(ranges), 5):
+        values = []
+        for vcell in range[start : start + 5]:
+            values.append(vcell.value)
+        unko_messages.append(values)
+    
     
 
     
