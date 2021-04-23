@@ -200,7 +200,7 @@ async def com_osirase(ctx):
 async def com_reload(ctx):
     await func_get_unko_message_spreadsheet()
     global unko_messages
-    
+    await ctx.send('読み込みました')
 
 
 
