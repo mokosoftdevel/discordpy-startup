@@ -20,6 +20,11 @@ unko_nemui = []
 # おはよう
 unko_ohayo = []
 
+# massa
+unko_massa = []
+
+# 食べよ
+unko_tabeyo = []
 
 
 
@@ -46,6 +51,8 @@ wb = gc.open_by_key(sheet)
 sheet_messages = wb.worksheet('messages')
 sheet_uranai = wb.worksheet('uranai')
 sheet_ohayou = wb.worksheet('ohayou')
+sheet_massa = wb.worksheet('massa')
+sheet_tabeyo = wb.worksheet('tabeyo')
 
 
 
@@ -121,33 +128,15 @@ async def ping(ctx):
 
 @bot.command(aliases=['massa','Massa','まっさ'])
 async def com_massa(ctx):
-    await ctx.send('<:Massa:761401088540672010> <:uruse:760475866626785342>')
+    global unko_massa
+    mes = random.choice(unko_massa)
+    await ctx.send(mes)
 
 
 @bot.command(aliases=['何食べよ','何食べよ？'])
 async def com_tabeyo(ctx):
-    rand_int = random.randint(1,10)
-    mes = ''
-    if rand_int == 1:
-        mes = 'んーーそやな、パスタとかどう？'
-    if rand_int == 2:
-        mes = '今日はあれやで、中華やろ'
-    if rand_int == 3:
-        mes = 'ここは一発焼肉で！'
-    if rand_int == 4:
-        mes = 'なんちゅうか、パン食いたくない？'
-    if rand_int == 5:
-        mes = 'ピッツァ'
-    if rand_int == 6:
-        mes = 'やっぱ和食よねっ'
-    if rand_int == 7:
-        mes = 'ラーメンいっとこ！'
-    if rand_int == 8:
-        mes = '食べたらあかん'
-    if rand_int == 9:
-        mes = 'スープ　スープだけ'
-    if rand_int == 10:
-        mes = 'コンビニでええんちゃう'
+    global unko_tabeyo
+    mes = random.choice(unko_tabeyo)
     await ctx.send(f"{ctx.author.mention}"+' '+mes)
 
 
@@ -169,6 +158,8 @@ async def com_reload(ctx):
     await func_get_unko_message_spreadsheet()
     await func_get_unko_nemui_spreadsheet()
     await func_get_unko_ohayo_spreadsheet()
+    await func_get_unko_massa_spreadsheet()
+    await func_get_unko_tabeyo_spreadsheet()
     # global unko_messages
     # print(unko_messages)
     await ctx.send('読み込みんだで！おおきに！')
@@ -215,7 +206,22 @@ async def func_get_unko_ohayo_spreadsheet():
     for vcell in ranges:
         unko_ohayo.append(vcell.value)
 
-    
+async def func_get_unko_massa_spreadsheet():
+    global unko_massa
+    unko_massa.clear()
+    last_line = int(sheet_massa.cell(1,2).value)
+    ranges = sheet_massa.range(3,1,last_line,1)
+    for vcell in ranges:
+        unko_massa.append(vcell.value)
+
+async def func_get_unko_tabeyo_spreadsheet():
+    global unko_tabeyo
+    unko_tabeyo.clear()
+    last_line = int(sheet_tabeyo.cell(1,2).value)
+    ranges = sheet_tabeyo.range(3,1,last_line,1)
+    for vcell in ranges:
+        unko_tabeyo.append(vcell.value)
+
 
 
 
@@ -228,5 +234,7 @@ async def func_get_unko_ohayo_spreadsheet():
 bot.loop.create_task(func_get_unko_message_spreadsheet())
 bot.loop.create_task(func_get_unko_nemui_spreadsheet())
 bot.loop.create_task(func_get_unko_ohayo_spreadsheet())
+bot.loop.create_task(func_get_unko_massa_spreadsheet())
+bot.loop.create_task(func_get_unko_tabeyo_spreadsheet())
 
 bot.run(token)
