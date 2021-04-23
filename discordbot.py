@@ -196,7 +196,7 @@ async def com_osirase(ctx):
     await ctx.send('@everyone はいはいみんな '+f"{ctx.author.mention}"+' が言いたいことがあるらしいで、ちょっと静かにしたってな、はいどうぞ')
 
 
-@bot.command(aliases['りろーど','リロード'])
+@bot.command(aliases=['りろーど','リロード'])
 async def com_reload(ctx):
     await func_get_unko_message_spreadsheet()
     global unko_messages
