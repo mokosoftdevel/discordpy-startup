@@ -3,6 +3,9 @@ import os
 import traceback
 import random
 import discord
+import gspread
+import json
+from oauth2client.service_account import ServiceAccountCredentials 
 
 bot = commands.Bot(command_prefix='うんこ')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -10,6 +13,37 @@ token = os.environ['DISCORD_BOT_TOKEN']
 
 # うんこの受け答えlist
 unko_messages = []
+
+
+
+
+
+
+# google spread sheet api 
+sheet = os.environ['SHEETKEY']
+scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']    
+credential = {
+                "type": "service_account",
+                "project_id": os.environ['SHEET_PROJECT_ID'],
+                "private_key_id": os.environ['SHEET_PRIVATE_KEY_ID'],
+                "private_key": os.environ['SHEET_PRIVATE_KEY'],
+                "client_email": os.environ['SHEET_CLIENT_EMAIL'],
+                "client_id": os.environ['SHEET_CLIENT_ID'],
+                "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+                "token_uri": "https://oauth2.googleapis.com/token",
+                "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+                "client_x509_cert_url":  os.environ['SHEET_CLIENT_X509_CERT_URL']
+             }
+
+credentials = ServiceAccountCredentials.from_json_keyfile_dict(credential, scope)
+gc = gspread.authorize(credentials)
+wb = gc.open_by_key(sheet)
+sheet_messages = wb.worksheet('messasges')
+
+
+
+
+
 
 
 
@@ -162,6 +196,12 @@ async def com_osirase(ctx):
     await ctx.send('@everyone はいはいみんな '+f"{ctx.author.mention}"+' が言いたいことがあるらしいで、ちょっと静かにしたってな、はいどうぞ')
 
 
+@bot.command(aliases['りろーど','リロード'])
+async def com_reload(ctx):
+    await func_get_unko_message_spreadsheet()
+    global unko_messages
+    
+
 
 
 async def func_get_unko_message_localhost():
@@ -170,6 +210,13 @@ async def func_get_unko_message_localhost():
     unko_messages.append(['end','うん','こ',1,'💩'])
     unko_messages.append(['find','うんこ','なに？',1,'💩'])
     unko_messages.append(['find','くそ','なんや？',1,'💢'])
+
+async def func_get_unko_message_spreadsheet():
+    global unko_messages
+    unko_messages.clear()
+    last_line = int(sheet_messages.cell(1,2).text)
+    ranges = sheet_messages.range(3,1,last_line,5)
+    print(ranges)
     
 
 
