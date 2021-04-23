@@ -8,6 +8,12 @@ bot = commands.Bot(command_prefix='うんこ')
 token = os.environ['DISCORD_BOT_TOKEN']
 
 
+# うんこの受け答えlist
+unko_messages = []
+
+
+
+
 @bot.event
 async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
@@ -21,6 +27,25 @@ async def on_message(message):
         return
     if message.content != 'うんこ' and message.content.startswith('うんこ'):
         return
+    global unko_messages
+    for line in unko_messages:
+        if line[0] == 'end':
+            if message.content.endswith(list[1]):
+                if int(list[3]) == 1:
+                    await message.add_reaction(list[4])
+                if len(list[2]) > 0:
+                    await message.channel.send(list[2])
+                return
+        elif line[0] == 'find':
+            if line[1] in message.content:
+                if int(list[3]) == 1:
+                    await message.add_reaction(list[4])
+                if len(list[2]) > 0:
+                    await message.channel.send(list[2])
+                return
+        
+
+    """
     if message.content.endswith('うん'):
         await message.add_reaction('💩')
         await message.channel.send('こ')
@@ -33,6 +58,7 @@ async def on_message(message):
         await message.channel.send('なんや？')
     if 'くさい' in message.content or '臭い' in message.content:
         await message.channel.send('臭いのわいちゃうで？')
+    """
 
 
 @bot.command()
@@ -134,7 +160,26 @@ async def com_ohayo(ctx):
 @bot.command(aliases=['お知らせ'])
 async def com_osirase(ctx):
     await ctx.send('@everyone はいはいみんな '+f"{ctx.author.mention}"+' が言いたいことがあるらしいで、ちょっと静かにしたってな、はいどうぞ')
+
+
+
+
+async def func_get_unko_message_localhost():
+    global unko_messages
+    unko_messages.clear()
+    unko_messages.append(['end','うん','こ',1,'💩'])
+    unko_messages.append(['find','うんこ','なに？',1,'💩'])
+    unko_messages.append(['find','くそ','なんや？',1,'💢'])
     
 
+
+
+
+
+
+
+
+
+bot.loop.create_task(func_get_unko_message_localhost())
 
 bot.run(token)
