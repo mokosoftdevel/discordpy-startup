@@ -7,6 +7,7 @@ import gspread
 import json
 from oauth2client.service_account import ServiceAccountCredentials 
 from datetime import datetime
+from discord.ext import tasks
 
 bot = commands.Bot(command_prefix='うんこ')
 token = os.environ['DISCORD_BOT_TOKEN']
