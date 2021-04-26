@@ -6,6 +6,7 @@ import discord
 import gspread
 import json
 from oauth2client.service_account import ServiceAccountCredentials 
+from datetime import datetime
 
 bot = commands.Bot(command_prefix='うんこ')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -54,6 +55,18 @@ sheet_ohayou = wb.worksheet('ohayou')
 sheet_massa = wb.worksheet('massa')
 sheet_tabeyo = wb.worksheet('tabeyo')
 
+bot_channel_id = 738973128645935104
+
+
+@tasks.loop(seconds=60)
+async def loop():
+    now = datetime.now().strftime('%H:%M')
+    print(now)
+    if now == '07:00':
+        channel = discord.Client().get_channel(bot_channel_id)
+        await channel.send('15時になったで')
+
+loop.start()
 
 
 @bot.event
