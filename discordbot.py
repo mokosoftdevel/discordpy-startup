@@ -64,9 +64,9 @@ JST = timezone(timedelta(hours=+9), 'JS')
 async def loop():
     now = datetime.now(JST).strftime('%H:%M')
     print(now)
-    if now == '15:30':
-        channel = discord.Client().get_channel(bot_channel_id)
-        await channel.send('15時30分になったで')
+    if now == '15:42':
+        channel = bot.get_channel(bot_channel_id)
+        await channel.send('15時45分になったで')
 
 loop.start()
 
