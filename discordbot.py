@@ -6,7 +6,7 @@ import discord
 import gspread
 import json
 from oauth2client.service_account import ServiceAccountCredentials 
-from datetime import datetime
+from datetime import datetime,timedelta,timezone
 from discord.ext import tasks
 
 bot = commands.Bot(command_prefix='うんこ')
@@ -57,11 +57,12 @@ sheet_massa = wb.worksheet('massa')
 sheet_tabeyo = wb.worksheet('tabeyo')
 
 bot_channel_id = 738973128645935104
+JST = timezone(timedelta(hours=+9), 'JS')
 
 
 @tasks.loop(seconds=60)
 async def loop():
-    now = datetime.now().strftime('%H:%M')
+    now = datetime.now(JST).strftime('%H:%M')
     print(now)
     if now == '07:00':
         channel = discord.Client().get_channel(bot_channel_id)
