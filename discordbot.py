@@ -28,6 +28,8 @@ unko_massa = []
 # 食べよ
 unko_tabeyo = []
 
+# schedule
+unko_schedule = []
 
 
 
@@ -55,6 +57,7 @@ sheet_uranai = wb.worksheet('uranai')
 sheet_ohayou = wb.worksheet('ohayou')
 sheet_massa = wb.worksheet('massa')
 sheet_tabeyo = wb.worksheet('tabeyo')
+sheet_schedule = wb.worksheet('schedule')
 
 bot_channel_id = 738973128645935104
 JST = timezone(timedelta(hours=+9), 'JS')
@@ -63,10 +66,11 @@ JST = timezone(timedelta(hours=+9), 'JS')
 @tasks.loop(seconds=60)
 async def loop():
     now = datetime.now(JST).strftime('%H:%M')
-    print(now)
-    if now == '15:42':
-        channel = bot.get_channel(bot_channel_id)
-        await channel.send('15時45分になったで')
+    # print(now)
+    for line in unko_schedule:
+        if now == line[0]:
+            channel = bot.get_channel(int(line[1]))
+            await channel.send(line[2])
 
 loop.start()
 
@@ -175,6 +179,8 @@ async def com_reload(ctx):
     await func_get_unko_ohayo_spreadsheet()
     await func_get_unko_massa_spreadsheet()
     await func_get_unko_tabeyo_spreadsheet()
+    await func_get_unko_schedule_spreadsheet()
+    
     # global unko_messages
     # print(unko_messages)
     await ctx.send('読み込みんだで！おおきに！')
@@ -237,6 +243,17 @@ async def func_get_unko_tabeyo_spreadsheet():
     for vcell in ranges:
         unko_tabeyo.append(vcell.value)
 
+async def func_get_unko_schedule_spreadsheet():
+    global unko_schedule
+    unko_schedule.clear()
+    last_line = int(sheet_schedule.cell(1,2).value)
+    column_size = 3
+    ranges = sheet_schedule.range(3,1,last_line,column_size)
+    for start in range(0, len(ranges), column_size):
+        values = []
+        for vcell in ranges[start : start + column_size]:
+            values.append(vcell.value)
+        unko_schedule.append(values)
 
 
 
@@ -251,5 +268,6 @@ bot.loop.create_task(func_get_unko_nemui_spreadsheet())
 bot.loop.create_task(func_get_unko_ohayo_spreadsheet())
 bot.loop.create_task(func_get_unko_massa_spreadsheet())
 bot.loop.create_task(func_get_unko_tabeyo_spreadsheet())
+bot.loop.create_task(func_get_unko_schedule_spreadsheet())
 
 bot.run(token)
