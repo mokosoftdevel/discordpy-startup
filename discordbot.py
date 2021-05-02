@@ -71,6 +71,8 @@ async def loop():
         if now == line[0]:
             channel = bot.get_channel(int(line[1]))
             await channel.send(line[2])
+        if now == "00:00": 
+            await func_all_reload()
 
 loop.start()
 
@@ -174,17 +176,17 @@ async def com_osirase(ctx):
 @bot.command(aliases=['りろーど','リロード'])
 async def com_reload(ctx):
     await ctx.send('読み込むでー')
+    await func_all_reload()
+    await ctx.send('読み込みんだで！おおきに！')
+
+
+async def func_all_reload():
     await func_get_unko_message_spreadsheet()
     await func_get_unko_nemui_spreadsheet()
     await func_get_unko_ohayo_spreadsheet()
     await func_get_unko_massa_spreadsheet()
     await func_get_unko_tabeyo_spreadsheet()
     await func_get_unko_schedule_spreadsheet()
-    
-    # global unko_messages
-    # print(unko_messages)
-    await ctx.send('読み込みんだで！おおきに！')
-
 
 
 async def func_get_unko_message_localhost():
