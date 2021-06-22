@@ -173,6 +173,38 @@ async def com_slot(ctx):
     mes3 = random.choice(unko_slot)
     await ctx.send(mes1+mes2+mes3)
 
+@bot.command(aliases=['スロット７連','すろっと７連'])
+async def com_slot7(ctx):
+    global unko_slot
+    mes1 = random.choice(unko_slot)
+    mes2 = random.choice(unko_slot)
+    mes3 = random.choice(unko_slot)
+    await ctx.send(mes1+mes2+mes3)
+    mes1 = random.choice(unko_slot)
+    mes2 = random.choice(unko_slot)
+    mes3 = random.choice(unko_slot)
+    await ctx.send(mes1+mes2+mes3)
+    mes1 = random.choice(unko_slot)
+    mes2 = random.choice(unko_slot)
+    mes3 = random.choice(unko_slot)
+    await ctx.send(mes1+mes2+mes3)
+    mes1 = random.choice(unko_slot)
+    mes2 = random.choice(unko_slot)
+    mes3 = random.choice(unko_slot)
+    await ctx.send(mes1+mes2+mes3)
+    mes1 = random.choice(unko_slot)
+    mes2 = random.choice(unko_slot)
+    mes3 = random.choice(unko_slot)
+    await ctx.send(mes1+mes2+mes3)
+    mes1 = random.choice(unko_slot)
+    mes2 = random.choice(unko_slot)
+    mes3 = random.choice(unko_slot)
+    await ctx.send(mes1+mes2+mes3)
+    mes1 = random.choice(unko_slot)
+    mes2 = random.choice(unko_slot)
+    mes3 = random.choice(unko_slot)
+    await ctx.send(mes1+mes2+mes3)
+    
 
 @bot.command(aliases=['おはよう'])
 async def com_ohayo(ctx):
