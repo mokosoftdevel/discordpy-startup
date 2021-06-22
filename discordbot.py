@@ -31,6 +31,9 @@ unko_tabeyo = []
 # schedule
 unko_schedule = []
 
+# slot list
+unko_slot = []
+
 
 
 # google spread sheet api 
@@ -58,6 +61,7 @@ sheet_ohayou = wb.worksheet('ohayou')
 sheet_massa = wb.worksheet('massa')
 sheet_tabeyo = wb.worksheet('tabeyo')
 sheet_schedule = wb.worksheet('schedule')
+sheet_slot = wb.worksheet('slot')
 
 bot_channel_id = 738973128645935104
 JST = timezone(timedelta(hours=+9), 'JS')
@@ -161,6 +165,15 @@ async def com_tabeyo(ctx):
     await ctx.send(f"{ctx.author.mention}"+' '+mes)
 
 
+@bot.command(aliases="['スロット','すろっと']")
+async def com_slot(ctx):
+    global unko_slot
+    mes1 = random.choice(unko_slot)
+    mes2 = random.choice(unko_slot)
+    mes3 = random.choice(unko_slot)
+    await ctx.send(mes1+mes2+mes3)
+
+
 @bot.command(aliases=['おはよう'])
 async def com_ohayo(ctx):
     global unko_ohayo
@@ -187,6 +200,7 @@ async def func_all_reload():
     await func_get_unko_massa_spreadsheet()
     await func_get_unko_tabeyo_spreadsheet()
     await func_get_unko_schedule_spreadsheet()
+    await func_get_unko_slot_spreadsheet()
 
 
 async def func_get_unko_message_localhost():
@@ -257,6 +271,13 @@ async def func_get_unko_schedule_spreadsheet():
             values.append(vcell.value)
         unko_schedule.append(values)
 
+async def func_get_unko_slot_spreadsheet():
+    global unko_slot
+    unko_slot.clear()
+    last_line = int(sheet_slot.cell(1,2).value)
+    ranges = sheet_slot.range(3,1,last_line,1)
+    for vcell in ranges:
+        unko_slot.append(vcell.value)
 
 
 
@@ -271,5 +292,6 @@ bot.loop.create_task(func_get_unko_ohayo_spreadsheet())
 bot.loop.create_task(func_get_unko_massa_spreadsheet())
 bot.loop.create_task(func_get_unko_tabeyo_spreadsheet())
 bot.loop.create_task(func_get_unko_schedule_spreadsheet())
+bot.loop.create_task(func_get_unko_slot_spreadsheet())
 
 bot.run(token)
