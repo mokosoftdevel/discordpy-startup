@@ -165,7 +165,7 @@ async def com_tabeyo(ctx):
     await ctx.send(f"{ctx.author.mention}"+' '+mes)
 
 
-@bot.command(aliases="['スロット','すろっと']")
+@bot.command(aliases=['スロット','すろっと'])
 async def com_slot(ctx):
     global unko_slot
     mes1 = random.choice(unko_slot)
