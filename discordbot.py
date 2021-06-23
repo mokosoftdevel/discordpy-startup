@@ -169,10 +169,48 @@ async def com_tabeyo(ctx):
 @bot.command(aliases=['スロット','すろっと'])
 async def com_slot(ctx):
     global unko_slot
-    mes1 = random.choice(unko_slot)
-    mes2 = random.choice(unko_slot)
-    mes3 = random.choice(unko_slot)
-    await ctx.send(mes1+mes2+mes3)
+
+    dice = list()
+    for x in range(1,8):
+        for y in range(1,8):
+            for z in range(1,8):
+                dice.append(100*x+10*y+z)
+    print(dice)
+
+    prob = list()
+    for i in range(343):
+        if dice[i] == 111:
+            prob.append(0.00045)
+        elif dice[i] == 222:
+            prob.append(0.00045)
+        elif dice[i] == 333:
+            prob.append(0.00045)
+        elif dice[i] == 444:
+            prob.append(0.00045)
+        elif dice[i] == 555:
+            prob.append(0.00045)
+        elif dice[i] == 666:
+            prob.append(0.00045)
+        elif dice[i] == 777:
+            prob.append(0.00045)
+        else:
+            prob.append(0.99685/336)
+
+    samples = np.random.choice(a=dice,size=1,p=prob)
+    print(samples)
+
+    for item in samples:
+        n = item
+        num = map(int, str(n))
+        nums = list(num)
+        print(nums)
+        mes = unko_slot[nums[0]]+unko_slot[nums[1]]+unko_slot[nums[2]]
+        await ctx.send(mes)
+
+    #mes1 = random.choice(unko_slot)
+    #mes2 = random.choice(unko_slot)
+    #mes3 = random.choice(unko_slot)
+    #await ctx.send(mes1+mes2+mes3)
 
 @bot.command(aliases=['スロット３連','すろっと３連'])
 async def com_slot7(ctx):
