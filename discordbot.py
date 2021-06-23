@@ -204,6 +204,7 @@ async def com_slot7(ctx):
             prob.append(0.99685/336)
 
     samples = np.random.choice(a=dice,size=3,p=prob)
+    print(samples)
 
     for item in samples:
         num = []
@@ -212,6 +213,7 @@ async def com_slot7(ctx):
             num.append(n % 10)
             n /= 10
         num.reverse()
+        print(num)
         mes = unko_slot[num[0]]+unko_slot[num[1]]+unko_slot[num[2]]
         await ctx.send(mes)
 
