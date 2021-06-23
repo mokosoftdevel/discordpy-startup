@@ -210,8 +210,9 @@ async def com_slot7(ctx):
     for item in samples:
         n = item
         num = map(int, str(n))
-        print(num)
-        mes = unko_slot[num[0]]+unko_slot[num[1]]+unko_slot[num[2]]
+        nums = list(num)
+        print(nums)
+        mes = unko_slot[nums[0]]+unko_slot[nums[1]]+unko_slot[nums[2]]
         await ctx.send(mes)
 
 
