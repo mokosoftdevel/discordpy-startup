@@ -183,7 +183,8 @@ async def com_slot7(ctx):
         for y in range(1,8):
             for z in range(1,8):
                 dice.append(100*x+10*y*z)
-    
+    print(dice)
+
     prob = list()
     for i in range(343):
         if dice[i] == 111:
