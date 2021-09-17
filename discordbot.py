@@ -180,21 +180,21 @@ async def com_slot(ctx):
     prob = list()
     for i in range(343):
         if dice[i] == 111:
-            prob.append(0.00045)
+            prob.append(0.0045)
         elif dice[i] == 222:
-            prob.append(0.00045)
+            prob.append(0.0045)
         elif dice[i] == 333:
-            prob.append(0.00045)
+            prob.append(0.0045)
         elif dice[i] == 444:
-            prob.append(0.00045)
+            prob.append(0.0045)
         elif dice[i] == 555:
-            prob.append(0.00045)
+            prob.append(0.0045)
         elif dice[i] == 666:
-            prob.append(0.00045)
+            prob.append(0.0045)
         elif dice[i] == 777:
-            prob.append(0.00045)
+            prob.append(0.0045)
         else:
-            prob.append(0.99685/336)
+            prob.append(0.9685/336)
 
     samples = np.random.choice(a=dice,size=1,p=prob)
     print(samples)
