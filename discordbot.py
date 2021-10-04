@@ -268,7 +268,7 @@ async def com_slot7(ctx):
     #await ctx.send(mes1+mes2+mes3)
 
 
-@bot.command(aliases=['かすたむ','カスタム'])
+@bot.command(aliases=['すろっとかすたむ','スロットカスタム'])
 async def com_slot_custom(ctx, *args):
     
     if len(args) != 7:
