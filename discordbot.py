@@ -275,7 +275,12 @@ async def com_slot_custom(ctx, *args):
         await ctx.send('絵文字を7つ指定してください')
         return
 
-    custom_slot = args
+    custom_slot = []
+    custom_slot.append('')
+    for item in args:
+        custom_slot.append(item)
+
+
 
     dice = list()
     for x in range(1,8):
