@@ -267,6 +267,54 @@ async def com_slot7(ctx):
     #mes3 = random.choice(unko_slot)
     #await ctx.send(mes1+mes2+mes3)
 
+
+@bot.command(aliases=['かすたむ','カスタム'])
+async def com_slot_custom(ctx, *args):
+    
+    if len(args) != 7:
+        await ctx.send('絵文字を7つ指定してください')
+        return
+
+    custom_slot = args
+
+    dice = list()
+    for x in range(1,8):
+        for y in range(1,8):
+            for z in range(1,8):
+                dice.append(100*x+10*y+z)
+    
+
+    prob = list()
+    for i in range(343):
+        if dice[i] == 111:
+            prob.append(0.00045)
+        elif dice[i] == 222:
+            prob.append(0.00045)
+        elif dice[i] == 333:
+            prob.append(0.00045)
+        elif dice[i] == 444:
+            prob.append(0.00045)
+        elif dice[i] == 555:
+            prob.append(0.00045)
+        elif dice[i] == 666:
+            prob.append(0.00045)
+        elif dice[i] == 777:
+            prob.append(0.00045)
+        else:
+            prob.append(0.99685/336)
+
+    samples = np.random.choice(a=dice,size=3,p=prob)
+    
+
+    for item in samples:
+        n = item
+        num = map(int, str(n))
+        nums = list(num)
+        mes = custom_slot[nums[0]]+custom_slot[nums[1]]+custom_slot[nums[2]]
+        await ctx.send(mes)
+
+
+
     
 
 @bot.command(aliases=['おはよう'])
