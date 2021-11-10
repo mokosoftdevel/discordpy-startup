@@ -278,7 +278,7 @@ async def com_deka_slot(ctx):
                 for xx in range(1,8):
                     for yy in range(1,8):
                         dice.append(10000*x+1000*y+100*z+10*xx+yy)
-    print(dice)
+    #print(dice)
 
     prob = list()
     for i in range(16807):
