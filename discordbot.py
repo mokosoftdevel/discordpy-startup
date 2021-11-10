@@ -267,6 +267,49 @@ async def com_slot7(ctx):
     #mes3 = random.choice(unko_slot)
     #await ctx.send(mes1+mes2+mes3)
 
+@bot.command(aliases=['でかスロット','でかすろっと','デカスロット'])
+async def com_deka_slot(ctx):
+    global unko_slot
+
+    dice = list()
+    for x in range(1,8):
+        for y in range(1,8):
+            for z in range(1,8):
+                for xx in range(1,8):
+                    for yy in range(1,8):
+                        dice.append(10000*x+1000*y+100*z+10*xx+yy)
+    print(dice)
+
+    prob = list()
+    for i in range(16807):
+        if dice[i] == 11111:
+            prob.append(0.0045)
+        elif dice[i] == 22222:
+            prob.append(0.0045)
+        elif dice[i] == 33333:
+            prob.append(0.0045)
+        elif dice[i] == 44444:
+            prob.append(0.0045)
+        elif dice[i] == 55555:
+            prob.append(0.0045)
+        elif dice[i] == 66666:
+            prob.append(0.0045)
+        elif dice[i] == 77777:
+            prob.append(0.0045)
+        else:
+            prob.append(0.9685/16807)
+
+    samples = np.random.choice(a=dice,size=5,p=prob)
+    print(samples)
+
+    for item in samples:
+        n = item
+        num = map(int, str(n))
+        nums = list(num)
+        print(nums)
+        mes = unko_slot[nums[0]]+unko_slot[nums[1]]+unko_slot[nums[2]]+unko_slot[nums[3]]+unko_slot[nums[4]]
+        await ctx.send(mes)
+
 
 @bot.command(aliases=['すろっとかすたむ','スロットカスタム'])
 async def com_slot_custom(ctx, *args):
