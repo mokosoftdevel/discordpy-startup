@@ -297,7 +297,7 @@ async def com_deka_slot(ctx):
         elif dice[i] == 77777:
             prob.append(0.0045)
         else:
-            prob.append(0.9685/16807)
+            prob.append(0.9685/16800)
 
     samples = np.random.choice(a=dice,size=5,p=prob)
     print(samples)
