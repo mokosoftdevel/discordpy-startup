@@ -165,6 +165,22 @@ async def com_tabeyo(ctx):
     mes = random.choice(unko_tabeyo)
     await ctx.send(f"{ctx.author.mention}"+' '+mes)
 
+@bot.command(aliases=['すろーっと','スローット'])
+async def com_sloooot(ctx):
+    global unko_slot
+
+    mes1 = random.choice(unko_slot)
+    mes2 = random.choice(unko_slot)
+    mes3 = random.choice(unko_slot)
+    mes4 = random.choice(unko_slot)
+    mes5 = random.choice(unko_slot)
+    mes6 = random.choice(unko_slot)
+    mes7 = random.choice(unko_slot)
+    mes8 = random.choice(unko_slot)
+    mes9 = random.choice(unko_slot)
+    mes10 = random.choice(unko_slot)
+    await ctx.send(mes1+mes2+mes3+mes4+mes5+mes6+mes7+mes8+mes9+mes10)
+
 
 @bot.command(aliases=['スロット','すろっと'])
 async def com_slot(ctx):
