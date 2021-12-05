@@ -169,16 +169,16 @@ async def com_tabeyo(ctx):
 
 @bot.command(aliases=['画像'])
 async def com_image(ctx):
-    img_red = np.zeros((200, 200, 3), np.uint8)
+    img_red = np.zeros((1000, 50, 3), np.uint8)
     img_red[:, :, 2] = 255
     #cv2.imwrite('tmp.png', img_red)
     #img = cv2.imread('tmp.png')
     cv2.putText(img_red,
-            text='tasukete',
-            org=(10, 30),
+            text='omaera zettaini yurusanai',
+            org=(10, 10),
             fontFace=cv2.FONT_HERSHEY_SIMPLEX,
             fontScale=1.0,
-            color=(255, 255, 0),
+            color=(255, 255, 250),
             thickness=2,
             lineType=cv2.LINE_4)
     cv2.imwrite('tmp.png', img_red)
