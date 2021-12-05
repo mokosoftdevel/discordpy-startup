@@ -169,7 +169,7 @@ async def com_tabeyo(ctx):
 
 @bot.command(aliases=['画像'])
 async def com_image(ctx):
-    img_red = np.zeros((1000, 50, 3), np.uint8)
+    img_red = np.zeros((100, 1000, 3), np.uint8)
     img_red[:, :, 2] = 255
     #cv2.imwrite('tmp.png', img_red)
     #img = cv2.imread('tmp.png')
