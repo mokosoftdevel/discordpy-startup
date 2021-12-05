@@ -174,10 +174,10 @@ async def com_image(ctx):
     #cv2.imwrite('tmp.png', img_red)
     #img = cv2.imread('tmp.png')
     cv2.putText(img_red,
-            text='omaera zettaini yurusanai',
-            org=(10, 10),
+            text='omaera zettaini yurusanai massa',
+            org=(30, 30),
             fontFace=cv2.FONT_HERSHEY_SIMPLEX,
-            fontScale=1.0,
+            fontScale=2.0,
             color=(255, 255, 250),
             thickness=2,
             lineType=cv2.LINE_4)
