@@ -9,6 +9,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime,timedelta,timezone
 from discord.ext import tasks
 import numpy as np
+import cv2
 
 bot = commands.Bot(command_prefix='うんこ')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -164,6 +165,16 @@ async def com_tabeyo(ctx):
     global unko_tabeyo
     mes = random.choice(unko_tabeyo)
     await ctx.send(f"{ctx.author.mention}"+' '+mes)
+
+
+@bot.command(aliases=['画像'])
+async def com_image(ctx):
+    img_red = np.zeros((200, 200, 3), np.uint8)
+    img_red[:, :, 2] = 255
+    cv2.imwrite('tmp.png', img_red)
+    await ctx.send(file=discord.File('tmp.png'))
+
+
 
 @bot.command(aliases=['すろーっと','スローット'])
 async def com_sloooot(ctx):
