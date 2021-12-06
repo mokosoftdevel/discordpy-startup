@@ -169,18 +169,24 @@ async def com_tabeyo(ctx):
 
 @bot.command(aliases=['画像'])
 async def com_image(ctx):
-    img_red = np.zeros((100, 1000, 3), np.uint8)
+    img_red = np.zeros((1000, 1000, 3), np.uint8)
     img_red[:, :, 2] = 255
     #cv2.imwrite('tmp.png', img_red)
     #img = cv2.imread('tmp.png')
-    cv2.putText(img_red,
-            text='omaera zettaini yurusanai massa',
-            org=(30, 30),
+
+    msgs = ['omaera','zettaini','yurusanai','massa','tasukete','korosu','yurusu','unko']
+
+    for num in random.randint(3,8):
+        cv2.putText(img_red,
+            text=random.choice(msgs),
+            org=(random.randint(0,1000), random.randint(0,1000)),
             fontFace=cv2.FONT_HERSHEY_SIMPLEX,
-            fontScale=2.0,
+            fontScale=random.uniform(0.5,5.0),
             color=(255, 255, 250),
-            thickness=2,
+            thickness=random.randint(1,5),
             lineType=cv2.LINE_4)
+    
+    
     cv2.imwrite('tmp.png', img_red)
     await ctx.send(file=discord.File('tmp.png'))
 
