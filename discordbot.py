@@ -176,14 +176,14 @@ async def com_image(ctx):
 
     msgs = ['omaera','zettaini','yurusanai','massa','tasukete','korosu','yurusu','unko']
 
-    for num in range(0, random.randint(3,8)):
+    for num in range(0, random.randint(3,12)):
         cv2.putText(img_red,
             text=random.choice(msgs),
-            org=(random.randint(0,1000), random.randint(0,1000)),
+            org=(random.randint(-100,1000), random.randint(-100,1000)),
             fontFace=cv2.FONT_HERSHEY_SIMPLEX,
-            fontScale=random.uniform(0.5,5.0),
+            fontScale=random.uniform(0.5,8.0),
             color=(255, 255, 250),
-            thickness=random.randint(1,5),
+            thickness=random.randint(1,8),
             lineType=cv2.LINE_4)
     
     
