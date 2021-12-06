@@ -176,7 +176,7 @@ async def com_image(ctx):
 
     msgs = ['omaera','zettaini','yurusanai','massa','tasukete','korosu','yurusu','unko']
 
-    for num in random.randint(3,8):
+    for num in range(0, random.randint(3,8)):
         cv2.putText(img_red,
             text=random.choice(msgs),
             org=(random.randint(0,1000), random.randint(0,1000)),
