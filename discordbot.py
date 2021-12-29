@@ -454,7 +454,7 @@ async def com_deka_slot_custom(ctx, *args):
         n = item
         num = map(int, str(n))
         nums = list(num)
-        mes = custom_slot[nums[0]]+custom_slot[nums[1]]+custom_slot[nums[2]+custom_slot[nums[3]+custom_slot[nums[4]]
+        mes = custom_slot[nums[0]]+custom_slot[nums[1]]+custom_slot[nums[2]]+custom_slot[nums[3]]+custom_slot[nums[4]]
         await ctx.send(mes)
 
 
