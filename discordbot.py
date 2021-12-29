@@ -405,6 +405,59 @@ async def com_slot_custom(ctx, *args):
         await ctx.send(mes)
 
 
+@bot.command(aliases=['でかすろっとかすたむ','デカスロットカスタム'])
+async def com_deka_slot_custom(ctx, *args):
+    
+    if len(args) != 7:
+        await ctx.send('絵文字を7つ指定してください')
+        return
+
+    custom_slot = []
+    custom_slot.append('')
+    for item in args:
+        custom_slot.append(item)
+
+
+
+    dice = list()
+    for x in range(1,8):
+        for y in range(1,8):
+            for z in range(1,8):
+                for xx in range(1,8):
+                    for yy in range(1,8):
+                        dice.append(10000*x+1000*y+100*z+10*xx+yy)
+    #print(dice)
+
+    prob = list()
+    for i in range(16807):
+        if dice[i] == 11111:
+            prob.append(0.0045)
+        elif dice[i] == 22222:
+            prob.append(0.0045)
+        elif dice[i] == 33333:
+            prob.append(0.0045)
+        elif dice[i] == 44444:
+            prob.append(0.0045)
+        elif dice[i] == 55555:
+            prob.append(0.0045)
+        elif dice[i] == 66666:
+            prob.append(0.0045)
+        elif dice[i] == 77777:
+            prob.append(0.0045)
+        else:
+            prob.append(0.9685/16800)
+
+    samples = np.random.choice(a=dice,size=5,p=prob)
+    
+
+    for item in samples:
+        n = item
+        num = map(int, str(n))
+        nums = list(num)
+        mes = custom_slot[nums[0]]+custom_slot[nums[1]]+custom_slot[nums[2]+custom_slot[nums[3]+custom_slot[nums[4]]
+        await ctx.send(mes)
+
+
 
     
 
