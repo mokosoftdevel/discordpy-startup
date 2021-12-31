@@ -10,6 +10,7 @@ from datetime import datetime,timedelta,timezone
 from discord.ext import tasks
 import numpy as np
 import cv2
+import time
 
 bot = commands.Bot(command_prefix='うんこ')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -35,6 +36,9 @@ unko_schedule = []
 
 # slot list
 unko_slot = []
+
+# omikuji
+unko_omikuji = []
 
 
 
@@ -64,6 +68,7 @@ sheet_massa = wb.worksheet('massa')
 sheet_tabeyo = wb.worksheet('tabeyo')
 sheet_schedule = wb.worksheet('schedule')
 sheet_slot = wb.worksheet('slot')
+sheet_omikuji = wb.worksheet('omikuji')
 
 bot_channel_id = 738973128645935104
 JST = timezone(timedelta(hours=+9), 'JS')
@@ -458,6 +463,14 @@ async def com_deka_slot_custom(ctx, *args):
         await ctx.send(mes)
 
 
+@bot.command(aliases=['おみくじ'])
+async def com_ohayo(ctx):
+    global unko_ohayo
+    today = datetime.date.today()
+    mes = random.choice(unko_ohayo)
+    await ctx.send(f"{ctx.author.mention}"+'はんの'+today.year+'年の運勢は…')
+    await time.sleep(1)
+    await ctx.send(mes+' やで！')
 
     
 
@@ -488,6 +501,7 @@ async def func_all_reload():
     await func_get_unko_tabeyo_spreadsheet()
     await func_get_unko_schedule_spreadsheet()
     await func_get_unko_slot_spreadsheet()
+    await func_get_unko_omikuji_spreadsheet()
 
 
 async def func_get_unko_message_localhost():
@@ -565,6 +579,14 @@ async def func_get_unko_slot_spreadsheet():
     ranges = sheet_slot.range(3,1,last_line,1)
     for vcell in ranges:
         unko_slot.append(vcell.value)
+
+async def func_get_unko_omikuji_spreadsheet():
+    global unko_omikuji
+    unko_omikuji.clear()
+    last_line = int(sheet_omikuji.cell(1,2).value)
+    ranges = sheet_omikuji.range(3,1,last_line,1)
+    for vcell in ranges:
+        unko_omikuji.append(vcell.value)
 
 
 
