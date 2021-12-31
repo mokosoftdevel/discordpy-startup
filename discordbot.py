@@ -604,5 +604,6 @@ bot.loop.create_task(func_get_unko_massa_spreadsheet())
 bot.loop.create_task(func_get_unko_tabeyo_spreadsheet())
 bot.loop.create_task(func_get_unko_schedule_spreadsheet())
 bot.loop.create_task(func_get_unko_slot_spreadsheet())
+bot.loop.create_task(func_get_unko_omikuji_spreadsheet())
 
 bot.run(token)
