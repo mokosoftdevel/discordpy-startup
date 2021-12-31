@@ -466,12 +466,11 @@ async def com_deka_slot_custom(ctx, *args):
 @bot.command(aliases=['おみくじ'])
 async def com_omikuji(ctx):
     global unko_omikuji
-    print(unko_omikuji)
+    #print(unko_omikuji)
     today_year = datetime.now(JST).strftime('%Y')
-    print(today_year)
+    #print(today_year)
     mes = random.choice(unko_omikuji)
     await ctx.send(f"{ctx.author.mention}"+'はんの'+today_year+'年の運勢は…')
-    await time.sleep(1)
     await ctx.send(mes+' やで！')
 
     
