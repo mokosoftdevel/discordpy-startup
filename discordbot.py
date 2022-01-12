@@ -463,6 +463,19 @@ async def com_deka_slot_custom(ctx, *args):
         await ctx.send(mes)
 
 
+@bot.command(aliases=['かべ','カベ','壁'])
+async def com_kabe(ctx):
+    global unko_slot
+
+    for i in range(20):
+        slots = ""
+        for j in range(20):
+            slots += unko_slot.choice()
+        await ctx.send(slots)
+
+
+
+
 @bot.command(aliases=['おみくじ'])
 async def com_omikuji(ctx):
     global unko_omikuji
