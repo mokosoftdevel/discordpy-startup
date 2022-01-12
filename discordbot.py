@@ -468,8 +468,8 @@ async def com_kabe(ctx):
     global unko_slot
 
     slots = ""
-    for i in range(16):
-        for j in range(20):
+    for i in range(12):
+        for j in range(12):
             slots += random.choice(unko_slot)
         slots += "\n"
     
