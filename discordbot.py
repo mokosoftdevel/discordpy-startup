@@ -467,8 +467,8 @@ async def com_deka_slot_custom(ctx, *args):
 async def com_kabe(ctx):
     global unko_slot
 
+    slots = ""
     for i in range(16):
-        slots = ""
         for j in range(20):
             slots += random.choice(unko_slot)
         slots += "\n"
