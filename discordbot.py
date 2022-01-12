@@ -470,7 +470,7 @@ async def com_kabe(ctx):
     for i in range(20):
         slots = ""
         for j in range(20):
-            slots += unko_slot.choice()
+            slots += random.choice(unko_slot)
         await ctx.send(slots)
 
 
