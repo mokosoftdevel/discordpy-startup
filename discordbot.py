@@ -36,6 +36,7 @@ unko_schedule = []
 
 # slot list
 unko_slot = []
+unko_slot2 = []
 
 # omikuji
 unko_omikuji = []
@@ -318,6 +319,7 @@ async def com_slot7(ctx):
 @bot.command(aliases=['でかスロット','でかすろっと','デカスロット','すろっと','スロット'])
 async def com_deka_slot(ctx):
     global unko_slot
+    global unko_slot2
 
     dice = list()
     for x in range(1,8):
@@ -350,13 +352,23 @@ async def com_deka_slot(ctx):
     samples = np.random.choice(a=dice,size=5,p=prob)
     print(samples)
 
-    for item in samples:
-        n = item
-        num = map(int, str(n))
-        nums = list(num)
-        print(nums)
-        mes = unko_slot[nums[0]]+unko_slot[nums[1]]+unko_slot[nums[2]]+unko_slot[nums[3]]+unko_slot[nums[4]]
-        await ctx.send(mes)
+    rand_int = random.randint(0,1)
+    if rand_int == 0:
+        for item in samples:
+            n = item
+            num = map(int, str(n))
+            nums = list(num)
+            print(nums)
+            mes = unko_slot[nums[0]]+unko_slot[nums[1]]+unko_slot[nums[2]]+unko_slot[nums[3]]+unko_slot[nums[4]]
+            await ctx.send(mes)
+    else:
+        for item in samples:
+            n = item
+            num = map(int, str(n))
+            nums = list(num)
+            print(nums)
+            mes = unko_slot2[nums[0]]+unko_slot2[nums[1]]+unko_slot2[nums[2]]+unko_slot2[nums[3]]+unko_slot2[nums[4]]
+            await ctx.send(mes)
 
 
 @bot.command(aliases=['すろっとかすたむ','スロットカスタム'])
@@ -596,6 +608,12 @@ async def func_get_unko_slot_spreadsheet():
     ranges = sheet_slot.range(3,1,last_line,1)
     for vcell in ranges:
         unko_slot.append(vcell.value)
+    global unko_slot2
+    unko_slot2.clear()
+    last_line = int(sheet_slot.cell(1,2).value)
+    ranges = sheet_slot.range(3,2,last_line,2)
+    for vcell in ranges:
+        unko_slot2.append(vcell.value)
 
 async def func_get_unko_omikuji_spreadsheet():
     global unko_omikuji
