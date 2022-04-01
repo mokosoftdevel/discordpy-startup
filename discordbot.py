@@ -214,7 +214,7 @@ async def com_sloooot(ctx):
     await ctx.send(mes1+mes2+mes3+mes4+mes5+mes6+mes7+mes8+mes9+mes10)
 
 
-@bot.command(aliases=['スロット','すろっと'])
+@bot.command(aliases=['スロット１連','すろっと１連'])
 async def com_slot(ctx):
     global unko_slot
 
@@ -315,7 +315,7 @@ async def com_slot7(ctx):
     #mes3 = random.choice(unko_slot)
     #await ctx.send(mes1+mes2+mes3)
 
-@bot.command(aliases=['でかスロット','でかすろっと','デカスロット'])
+@bot.command(aliases=['でかスロット','でかすろっと','デカスロット','すろっと','スロット'])
 async def com_deka_slot(ctx):
     global unko_slot
 
