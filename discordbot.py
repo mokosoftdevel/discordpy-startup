@@ -37,6 +37,7 @@ unko_schedule = []
 # slot list
 unko_slot = []
 unko_slot2 = []
+custom_slot = []
 
 # omikuji
 unko_omikuji = []
@@ -76,7 +77,7 @@ JST = timezone(timedelta(hours=+9), 'JS')
 
 
 @tasks.loop(seconds=60)
-async def loop():
+async def loop(self, ctx):
     now = datetime.now(JST).strftime('%H:%M')
     # print(now)
     for line in unko_schedule:
@@ -84,7 +85,7 @@ async def loop():
             channel = bot.get_channel(int(line[1]))
             await channel.send(line[2])
             if line[2] == 'うんこすろっと':
-                await com_deka_slot()
+                await com_deka_slot(ctx)
     if now == "00:00": 
         await func_all_reload()
 
@@ -375,6 +376,8 @@ async def com_deka_slot(ctx):
 
 @bot.command(aliases=['すろっとかすたむ','スロットカスタム'])
 async def com_slot_custom(ctx, *args):
+    
+    global custom_slot
     
     if len(args) == 7:
         custom_slot = []
