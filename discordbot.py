@@ -38,6 +38,7 @@ unko_schedule = []
 unko_slot = []
 unko_slot2 = []
 custom_slot = []
+kakuritu = 0.0045
 
 # omikuji
 unko_omikuji = []
@@ -85,7 +86,7 @@ async def loop():
             channel = bot.get_channel(int(line[1]))
             await channel.send(line[2])
             if line[2] == 'うんこすろっと':
-                await com_deka_slot(commands.Context)
+                await com_deka_slot(channel)
     if now == "00:00": 
         await func_all_reload()
 
@@ -323,6 +324,7 @@ async def com_slot7(ctx):
 async def com_deka_slot(ctx):
     global unko_slot
     global unko_slot2
+    global kakuritu
 
     dice = list()
     for x in range(1,8):
@@ -333,24 +335,28 @@ async def com_deka_slot(ctx):
                         dice.append(10000*x+1000*y+100*z+10*xx+yy)
     #print(dice)
 
+    print(kakuritu)
+    all_kaku = 1.000 - (kakuritu*7)
+    print(all_kaku)
+
     prob = list()
     for i in range(16807):
         if dice[i] == 11111:
-            prob.append(0.0045)
+            prob.append(kakuritu)
         elif dice[i] == 22222:
-            prob.append(0.0045)
+            prob.append(kakuritu)
         elif dice[i] == 33333:
-            prob.append(0.0045)
+            prob.append(kakuritu)
         elif dice[i] == 44444:
-            prob.append(0.0045)
+            prob.append(kakuritu)
         elif dice[i] == 55555:
-            prob.append(0.0045)
+            prob.append(kakuritu)
         elif dice[i] == 66666:
-            prob.append(0.0045)
+            prob.append(kakuritu)
         elif dice[i] == 77777:
-            prob.append(0.0045)
+            prob.append(kakuritu)
         else:
-            prob.append(0.9685/16800)
+            prob.append(all_kaku/16800)
 
     samples = np.random.choice(a=dice,size=5,p=prob)
     print(samples)
@@ -378,6 +384,7 @@ async def com_deka_slot(ctx):
 async def com_slot_custom(ctx, *args):
     
     global custom_slot
+    global kakuritu
 
     if len(args) == 7:
         custom_slot = []
@@ -394,24 +401,28 @@ async def com_slot_custom(ctx, *args):
                         dice.append(10000*x+1000*y+100*z+10*xx+yy)
     #print(dice)
 
+    print(kakuritu)
+    all_kaku = 1.000 - (kakuritu*7)
+    print(all_kaku)
+
     prob = list()
     for i in range(16807):
         if dice[i] == 11111:
-            prob.append(0.0045)
+            prob.append(kakuritu)
         elif dice[i] == 22222:
-            prob.append(0.0045)
+            prob.append(kakuritu)
         elif dice[i] == 33333:
-            prob.append(0.0045)
+            prob.append(kakuritu)
         elif dice[i] == 44444:
-            prob.append(0.0045)
+            prob.append(kakuritu)
         elif dice[i] == 55555:
-            prob.append(0.0045)
+            prob.append(kakuritu)
         elif dice[i] == 66666:
-            prob.append(0.0045)
+            prob.append(kakuritu)
         elif dice[i] == 77777:
-            prob.append(0.0045)
+            prob.append(kakuritu)
         else:
-            prob.append(0.9685/16800)
+            prob.append(all_kaku/16800)
 
     samples = np.random.choice(a=dice,size=5,p=prob)
     
@@ -605,6 +616,8 @@ async def func_get_unko_schedule_spreadsheet():
 
 async def func_get_unko_slot_spreadsheet():
     global unko_slot
+    global kakuritu
+    kakuritu = float(int(sheet_schedule.cell(1,2).value))
     unko_slot.clear()
     last_line = int(sheet_slot.cell(1,2).value)
     ranges = sheet_slot.range(3,1,last_line,1)
