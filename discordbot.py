@@ -83,6 +83,8 @@ async def loop():
         if now == line[0]:
             channel = bot.get_channel(int(line[1]))
             await channel.send(line[2])
+            if line[2] == 'うんこすろっと':
+                await com_deka_slot()
     if now == "00:00": 
         await func_all_reload()
 
@@ -374,51 +376,48 @@ async def com_deka_slot(ctx):
 @bot.command(aliases=['すろっとかすたむ','スロットカスタム'])
 async def com_slot_custom(ctx, *args):
     
-    if len(args) != 7:
-        await ctx.send('絵文字を7つ指定してください')
-        return
-
-    custom_slot = []
-    custom_slot.append('')
-    for item in args:
-        custom_slot.append(item)
-
-
+    if len(args) == 7:
+        custom_slot = []
+        custom_slot.append('')
+        for item in args:
+            custom_slot.append(item)
 
     dice = list()
     for x in range(1,8):
         for y in range(1,8):
             for z in range(1,8):
-                dice.append(100*x+10*y+z)
-    
+                for xx in range(1,8):
+                    for yy in range(1,8):
+                        dice.append(10000*x+1000*y+100*z+10*xx+yy)
+    #print(dice)
 
     prob = list()
-    for i in range(343):
-        if dice[i] == 111:
-            prob.append(0.00045)
-        elif dice[i] == 222:
-            prob.append(0.00045)
-        elif dice[i] == 333:
-            prob.append(0.00045)
-        elif dice[i] == 444:
-            prob.append(0.00045)
-        elif dice[i] == 555:
-            prob.append(0.00045)
-        elif dice[i] == 666:
-            prob.append(0.00045)
-        elif dice[i] == 777:
-            prob.append(0.00045)
+    for i in range(16807):
+        if dice[i] == 11111:
+            prob.append(0.0045)
+        elif dice[i] == 22222:
+            prob.append(0.0045)
+        elif dice[i] == 33333:
+            prob.append(0.0045)
+        elif dice[i] == 44444:
+            prob.append(0.0045)
+        elif dice[i] == 55555:
+            prob.append(0.0045)
+        elif dice[i] == 66666:
+            prob.append(0.0045)
+        elif dice[i] == 77777:
+            prob.append(0.0045)
         else:
-            prob.append(0.99685/336)
+            prob.append(0.9685/16800)
 
-    samples = np.random.choice(a=dice,size=3,p=prob)
+    samples = np.random.choice(a=dice,size=5,p=prob)
     
 
     for item in samples:
         n = item
         num = map(int, str(n))
         nums = list(num)
-        mes = custom_slot[nums[0]]+custom_slot[nums[1]]+custom_slot[nums[2]]
+        mes = custom_slot[nums[0]]+custom_slot[nums[1]]+custom_slot[nums[2]]+custom_slot[nums[3]]+custom_slot[nums[4]]
         await ctx.send(mes)
 
 
