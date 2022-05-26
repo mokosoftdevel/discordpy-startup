@@ -617,15 +617,15 @@ async def func_get_unko_schedule_spreadsheet():
 async def func_get_unko_slot_spreadsheet():
     global unko_slot
     global kakuritu
-    kakuritu = float(int(sheet_schedule.cell(1,2).value))
+    kakuritu = float(sheet_slot.cell(1,2).value)
     unko_slot.clear()
-    last_line = int(sheet_slot.cell(1,2).value)
+    last_line = 10
     ranges = sheet_slot.range(3,1,last_line,1)
     for vcell in ranges:
         unko_slot.append(vcell.value)
     global unko_slot2
     unko_slot2.clear()
-    last_line = int(sheet_slot.cell(1,2).value)
+    last_line = 10
     ranges = sheet_slot.range(3,2,last_line,2)
     for vcell in ranges:
         unko_slot2.append(vcell.value)
