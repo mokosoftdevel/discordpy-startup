@@ -77,7 +77,7 @@ JST = timezone(timedelta(hours=+9), 'JS')
 
 
 @tasks.loop(seconds=60)
-async def loop(self, ctx):
+async def loop():
     now = datetime.now(JST).strftime('%H:%M')
     # print(now)
     for line in unko_schedule:
@@ -85,7 +85,7 @@ async def loop(self, ctx):
             channel = bot.get_channel(int(line[1]))
             await channel.send(line[2])
             if line[2] == 'うんこすろっと':
-                await com_deka_slot(ctx)
+                await com_deka_slot(commands.Context)
     if now == "00:00": 
         await func_all_reload()
 
@@ -378,7 +378,7 @@ async def com_deka_slot(ctx):
 async def com_slot_custom(ctx, *args):
     
     global custom_slot
-    
+
     if len(args) == 7:
         custom_slot = []
         custom_slot.append('')
