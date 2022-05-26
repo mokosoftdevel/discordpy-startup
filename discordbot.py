@@ -83,8 +83,8 @@ async def loop():
         if now == line[0]:
             channel = bot.get_channel(int(line[1]))
             await channel.send(line[2])
-        if now == "00:00": 
-            await func_all_reload()
+    if now == "00:00": 
+        await func_all_reload()
 
 loop.start()
 
