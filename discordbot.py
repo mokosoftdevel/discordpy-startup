@@ -80,6 +80,7 @@ JST = timezone(timedelta(hours=+9), 'JS')
 
 @tasks.loop(seconds=60)
 async def loop():
+    global unko_schedule
     now = datetime.now(JST).strftime('%H:%M')
     # print(now)
     for line in unko_schedule:
