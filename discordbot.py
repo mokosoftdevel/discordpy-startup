@@ -82,10 +82,11 @@ JST = timezone(timedelta(hours=+9), 'JS')
 async def loop():
     global unko_schedule
     now = datetime.now(JST).strftime('%H:%M')
-    # print(now)
+    print(now)
     for line in unko_schedule:
         if now == line[0]:
             channel = bot.get_channel(int(line[1]))
+            print(line)
             await channel.send(line[2])
             if line[2] == 'うんこすろっと':
                 await com_deka_slot(channel)
