@@ -3,3 +3,5 @@ gspread
 oauth2client
 numpy
 opencv-python--headless==4.5.1.48
+flask
+gunicorn

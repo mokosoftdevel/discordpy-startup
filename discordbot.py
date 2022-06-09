@@ -11,6 +11,7 @@ from discord.ext import tasks
 import numpy as np
 import cv2
 import time
+from flask import Flask
 
 bot = commands.Bot(command_prefix='うんこ')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -655,3 +656,14 @@ bot.loop.create_task(func_get_unko_slot_spreadsheet())
 bot.loop.create_task(func_get_unko_omikuji_spreadsheet())
 
 bot.run(token)
+
+
+
+
+# web 
+app = Flask(__name__)
+@app.route('/')
+def web_main():
+    return "hello world"
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port="8080")
