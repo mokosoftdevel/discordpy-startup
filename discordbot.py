@@ -663,8 +663,6 @@ bot.run(token)
 
 
 # web 
-print("debug")
-print(__name__)
 app = Flask(__name__)
 @app.route('/')
 def web_main():
