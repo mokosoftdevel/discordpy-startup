@@ -82,7 +82,7 @@ JST = timezone(timedelta(hours=+9), 'JS')
 async def loop():
     global unko_schedule
     now = datetime.now(JST).strftime('%H:%M')
-    print(now)
+    # print(now)
     for line in unko_schedule:
         if now == line[0]:
             channel = bot.get_channel(int(line[1]))
@@ -670,4 +670,4 @@ app = Flask(__name__)
 def web_main():
     return "hello world"
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0',port=80)
