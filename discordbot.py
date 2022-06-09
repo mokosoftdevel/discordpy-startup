@@ -11,7 +11,7 @@ from discord.ext import tasks
 import numpy as np
 import cv2
 import time
-from flask import Flask
+
 
 bot = commands.Bot(command_prefix='うんこ')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -661,12 +661,3 @@ bot.run(token)
 
 
 
-
-# web 
-app = Flask(__name__)
-@app.route('/')
-def web_main():
-    return "hello world"
-    
-if __name__ == "__main__":
-    app.run()
