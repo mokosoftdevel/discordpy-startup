@@ -327,6 +327,7 @@ async def com_slot7(ctx):
 async def com_deka_slot(ctx):
     global unko_slot
     global unko_slot2
+    global custom_slot
     global kakuritu
 
     dice = list()
@@ -338,9 +339,9 @@ async def com_deka_slot(ctx):
                         dice.append(10000*x+1000*y+100*z+10*xx+yy)
     #print(dice)
 
-    print(kakuritu)
+    #print(kakuritu)
     all_kaku = 1.000 - (kakuritu*7)
-    print(all_kaku)
+    #print(all_kaku)
 
     prob = list()
     for i in range(16807):
@@ -362,9 +363,13 @@ async def com_deka_slot(ctx):
             prob.append(all_kaku/16800)
 
     samples = np.random.choice(a=dice,size=5,p=prob)
-    print(samples)
+    #print(samples)
+
 
     rand_int = random.randint(0,1)
+    if len(custom_slot) > 0:
+        rand_int = random.randint(0,2)
+
     if rand_int == 0:
         for item in samples:
             n = item
@@ -373,13 +378,21 @@ async def com_deka_slot(ctx):
             print(nums)
             mes = unko_slot[nums[0]]+unko_slot[nums[1]]+unko_slot[nums[2]]+unko_slot[nums[3]]+unko_slot[nums[4]]
             await ctx.send(mes)
-    else:
+    elif rand_int == 1:
         for item in samples:
             n = item
             num = map(int, str(n))
             nums = list(num)
             print(nums)
             mes = unko_slot2[nums[0]]+unko_slot2[nums[1]]+unko_slot2[nums[2]]+unko_slot2[nums[3]]+unko_slot2[nums[4]]
+            await ctx.send(mes)
+    else:
+        for item in samples:
+            n = item
+            num = map(int, str(n))
+            nums = list(num)
+            print(nums)
+            mes = custom_slot[nums[0]]+custom_slot[nums[1]]+custom_slot[nums[2]]+custom_slot[nums[3]]+custom_slot[nums[4]]
             await ctx.send(mes)
 
 
@@ -389,53 +402,58 @@ async def com_slot_custom(ctx, *args):
     global custom_slot
     global kakuritu
 
+    if len(args) != 7:
+        await ctx.send('絵文字を7つ指定してください')
+        return
+
     if len(args) == 7:
         custom_slot = []
         custom_slot.append('')
         for item in args:
             custom_slot.append(item)
 
-    dice = list()
-    for x in range(1,8):
-        for y in range(1,8):
-            for z in range(1,8):
-                for xx in range(1,8):
-                    for yy in range(1,8):
-                        dice.append(10000*x+1000*y+100*z+10*xx+yy)
+    #dice = list()
+    #for x in range(1,8):
+    #    for y in range(1,8):
+    #        for z in range(1,8):
+    #            for xx in range(1,8):
+    #                for yy in range(1,8):
+    #                    dice.append(10000*x+1000*y+100*z+10*xx+yy)
     #print(dice)
 
-    print(kakuritu)
-    all_kaku = 1.000 - (kakuritu*7)
-    print(all_kaku)
+    #print(kakuritu)
+    #all_kaku = 1.000 - (kakuritu*7)
+    #print(all_kaku)
 
-    prob = list()
-    for i in range(16807):
-        if dice[i] == 11111:
-            prob.append(kakuritu)
-        elif dice[i] == 22222:
-            prob.append(kakuritu)
-        elif dice[i] == 33333:
-            prob.append(kakuritu)
-        elif dice[i] == 44444:
-            prob.append(kakuritu)
-        elif dice[i] == 55555:
-            prob.append(kakuritu)
-        elif dice[i] == 66666:
-            prob.append(kakuritu)
-        elif dice[i] == 77777:
-            prob.append(kakuritu)
-        else:
-            prob.append(all_kaku/16800)
+    #prob = list()
+    #for i in range(16807):
+    #    if dice[i] == 11111:
+    #        prob.append(kakuritu)
+    #    elif dice[i] == 22222:
+    #        prob.append(kakuritu)
+    #    elif dice[i] == 33333:
+    #        prob.append(kakuritu)
+    #    elif dice[i] == 44444:
+    #        prob.append(kakuritu)
+    #    elif dice[i] == 55555:
+    #        prob.append(kakuritu)
+    #    elif dice[i] == 66666:
+    #        prob.append(kakuritu)
+    #    elif dice[i] == 77777:
+    #        prob.append(kakuritu)
+    #    else:
+    #        prob.append(all_kaku/16800)
 
-    samples = np.random.choice(a=dice,size=5,p=prob)
+    #samples = np.random.choice(a=dice,size=5,p=prob)
     
+    await ctx.send('カスタムスロットを設定したよ♪')
 
-    for item in samples:
-        n = item
-        num = map(int, str(n))
-        nums = list(num)
-        mes = custom_slot[nums[0]]+custom_slot[nums[1]]+custom_slot[nums[2]]+custom_slot[nums[3]]+custom_slot[nums[4]]
-        await ctx.send(mes)
+    #for item in samples:
+    #    n = item
+    #    num = map(int, str(n))
+    #    nums = list(num)
+    #    mes = custom_slot[nums[0]]+custom_slot[nums[1]]+custom_slot[nums[2]]+custom_slot[nums[3]]+custom_slot[nums[4]]
+    #    await ctx.send(mes)
 
 
 @bot.command(aliases=['でかすろっとかすたむ','デカスロットカスタム'])
