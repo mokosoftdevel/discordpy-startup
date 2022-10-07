@@ -92,6 +92,10 @@ async def loop():
                 await com_deka_slot(channel)
     if now == "00:00": 
         await func_all_reload()
+    if now == "13:40":
+        channel = bot.get_channel(738973128645935104)
+        ato = datetime(2022,11,27) - datetime.now()
+        await channel.send('うんこbotが死ぬまであと '+ato+'日...')
 
 loop.start()
 
