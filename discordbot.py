@@ -127,7 +127,7 @@ async def loop_second():
             async for message in channel.history(limit=100):
                 #print(message.content)
                 td = now - message.created_at
-                #print(td.seconds)
+                print(td.seconds)
                 if td.seconds >= int(line[0]):
                     msgs.append(message)
                     print(message.content)
