@@ -123,8 +123,7 @@ async def loop_second():
                 is_log_check = True
                 return
             #print(channel)
-            messages = [message async for message in channel.history(limit=123)]
-            for message in messages:
+            async for message in channel.history():
                 #print(message.content)
                 td = now - message.created_at
                 #print(td.seconds)
