@@ -114,7 +114,9 @@ async def loop_second():
     if is_log_check:
         is_log_check = False
         for line in unko_log:
+            print(line[1])
             channel = bot.get_channel(int(line[1]))
+            print(channel.name)
             messages = [message async for message in channel.history(limit=123)]
             for message in messages:
                 print(message.content)
