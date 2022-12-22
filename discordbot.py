@@ -106,7 +106,7 @@ async def loop():
 
 loop.start()
 
-@tasks.loop(seconrd=1)
+@tasks.loop(seconds=1)
 async def loop_second():
     global unko_log
     now = datetime.now()
