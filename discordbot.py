@@ -138,7 +138,7 @@ async def loop_second():
 
                     
                     
-        is_log_check = False
+        is_log_check = True
 
 loop_second.start()
 
