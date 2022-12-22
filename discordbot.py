@@ -123,6 +123,7 @@ async def loop_second():
                 is_log_check = True
                 return
             print(channel)
+            print(int(line[0]))
             msgs = []
             async for message in channel.history(limit=100):
                 #print(message.content)
