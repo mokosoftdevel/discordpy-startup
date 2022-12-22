@@ -109,6 +109,7 @@ loop.start()
 @tasks.loop(seconds=1)
 async def loop_second():
     global unko_log
+    global is_log_check
     now = datetime.now()
     if is_log_check:
         is_log_check = False
