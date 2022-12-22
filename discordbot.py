@@ -120,6 +120,7 @@ async def loop_second():
             channel = bot.get_channel(int(line[1]))
             if channel is None:
                 print("Channel is none")
+                is_log_check = True
                 return
             #print(channel)
             messages = [message async for message in channel.history(limit=123)]
