@@ -129,7 +129,7 @@ async def loop_second():
                 #print(td.seconds)
                 if td.seconds >= int(line[0]):
                     message.delete
-                    print(message.content)
+                    # print(message.content)
                     
         is_log_check = True
 
