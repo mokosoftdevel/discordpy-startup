@@ -111,8 +111,8 @@ async def loop_second():
     global unko_log
     global is_log_check
     now = datetime.now()
-    print(now)
-    print(bot)
+    #print(now)
+    #print(bot)
     if is_log_check:
         is_log_check = False
         for line in unko_log:
