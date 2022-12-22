@@ -133,7 +133,7 @@ async def loop_second():
                     
         is_log_check = True
 
-loop_second.start()
+# loop_second.start()
 
 
 @bot.event
