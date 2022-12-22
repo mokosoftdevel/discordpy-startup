@@ -122,7 +122,7 @@ async def loop_second():
                 print("Channel is none")
                 is_log_check = True
                 return
-            #print(channel)
+            print(channel)
             async for message in channel.history():
                 #print(message.content)
                 td = now - message.created_at
