@@ -110,7 +110,7 @@ loop.start()
 async def loop_second():
     global unko_log
     global is_log_check
-    now = datetime.now(UTC)
+    now = datetime.now(datetime.timezone.utc)
     print(now)
     #print(bot)
     if is_log_check:
