@@ -123,17 +123,20 @@ async def loop_second():
                 is_log_check = True
                 return
             print(channel)
-            async for message in channel.history():
+            msgs = []
+            async for message in channel.history(limit=100):
                 #print(message.content)
                 td = now - message.created_at
                 #print(td.seconds)
                 if td.seconds >= int(line[0]):
-                    try:
-                        message.delete
-                    except (Forbidden, NotFound, HTTPException) as e:
-                        print(e)
-
+                    msgs.append(message)
                     print(message.content)
+            try:
+                channel.delete_messages(msgs)
+            except (ClientException, Forbidden, NotFound, HTTPException) as e:
+                print(e)
+
+                    
                     
         is_log_check = False
 
