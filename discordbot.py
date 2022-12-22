@@ -115,7 +115,8 @@ async def loop_second():
         is_log_check = False
         for line in unko_log:
             channel = bot.get_channel(int(line[1]))
-            async for message in channel.history():
+            messages = await channel.history(limit=200).flatten()
+            for message in messages:
                 print(message.content)
                 td = now - message.created_at
                 print(td.seconds)
