@@ -129,7 +129,7 @@ async def loop_second():
                 print(td.seconds)
                 if td.seconds >= int(line[0]):
                     print(message.content)
-                    await message.delete
+                    message.delete
         is_log_check = True
 
 loop_second.start()
