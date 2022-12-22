@@ -132,7 +132,7 @@ async def loop_second():
                     msgs.append(message)
                     print(message.content)
             try:
-                channel.delete_messages(msgs)
+                await channel.delete_messages(msgs)
             except (ClientException, Forbidden, NotFound, HTTPException) as e:
                 print(e)
 
