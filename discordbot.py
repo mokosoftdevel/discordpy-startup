@@ -12,6 +12,8 @@ import numpy as np
 import cv2
 import time
 
+from dotenv import load_dotenv
+load_dotenv()
 
 bot = commands.Bot(command_prefix='うんこ')
 token = os.environ['DISCORD_BOT_TOKEN']
