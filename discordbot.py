@@ -44,6 +44,10 @@ kakuritu = 0.0045
 # omikuji
 unko_omikuji = []
 
+# 削除リスト
+unko_log = []
+is_log_check = False
+
 
 
 # google spread sheet api 
@@ -73,6 +77,7 @@ sheet_tabeyo = wb.worksheet('tabeyo')
 sheet_schedule = wb.worksheet('schedule')
 sheet_slot = wb.worksheet('slot')
 sheet_omikuji = wb.worksheet('omikuji')
+sheet_log = wb.worksheet('log')
 
 bot_channel_id = 738973128645935104
 JST = timezone(timedelta(hours=+9), 'JS')
@@ -98,6 +103,24 @@ async def loop():
         await channel.send("うんこbotが死ぬまであと "+str(ato)+"日...")
 
 loop.start()
+
+@tasks.loop(seconrd=1)
+async def loop_second():
+    global unko_log
+    now = datetime.now()
+    if is_log_check:
+        is_log_check = False
+        for line in unko_log:
+            channel = bot.get_channel(int(line[1]))
+            async for message in channel.history():
+                td = now - message.created_at
+                if td.seconds >= int(line[0]):
+                    await message.delete
+        is_log_check = True
+
+
+
+loop_second.start()
 
 
 @bot.event
@@ -569,6 +592,7 @@ async def func_all_reload():
     await func_get_unko_schedule_spreadsheet()
     await func_get_unko_slot_spreadsheet()
     await func_get_unko_omikuji_spreadsheet()
+    await func_get_unko_log_spreadsheet()
 
 
 async def func_get_unko_message_localhost():
@@ -663,6 +687,20 @@ async def func_get_unko_omikuji_spreadsheet():
     for vcell in ranges:
         unko_omikuji.append(vcell.value)
 
+async def func_get_unko_log_spreadsheet():
+    global unko_log
+    global is_log_check
+    is_log_check = False
+    unko_log.clear()
+    last_line = int(sheet_log.cell(1,2).value)
+    column_size = 3
+    ranges = sheet_log.range(3,1,last_line,column_size)
+    for start in range(0, len(ranges), column_size):
+        values = []
+        for vcell in ranges[start : start + column_size]:
+            values.append(vcell.value)
+        unko_log.append(values)
+    is_log_check = True
 
 
 
@@ -678,6 +716,7 @@ bot.loop.create_task(func_get_unko_tabeyo_spreadsheet())
 bot.loop.create_task(func_get_unko_schedule_spreadsheet())
 bot.loop.create_task(func_get_unko_slot_spreadsheet())
 bot.loop.create_task(func_get_unko_omikuji_spreadsheet())
+bot.loop.create_task(func_get_unko_log_spreadsheet())
 
 bot.run(token)
 
