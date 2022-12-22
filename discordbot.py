@@ -125,7 +125,8 @@ async def loop_second():
                 td = now - message.created_at
                 print(td.seconds)
                 if td.seconds >= int(line[0]):
-                    await message.delete
+                    print(message.content)
+                    #await message.delete
         is_log_check = True
 
 loop_second.start()
