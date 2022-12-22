@@ -99,10 +99,10 @@ async def loop():
                 await com_deka_slot(channel)
     if now == "00:00": 
         await func_all_reload()
-    if now == "13:45":
-        channel = bot.get_channel(738973128645935104)
-        ato = datetime(2022,11,27) - datetime.now()
-        await channel.send("うんこbotが死ぬまであと "+str(ato)+"日...")
+    #if now == "13:45":
+    #    channel = bot.get_channel(738973128645935104)
+    #    ato = datetime(2022,11,27) - datetime.now()
+    #    await channel.send("うんこbotが死ぬまであと "+str(ato)+"日...")
 
 loop.start()
 
@@ -111,6 +111,8 @@ async def loop_second():
     global unko_log
     global is_log_check
     now = datetime.now()
+    print(now)
+    print(bot)
     if is_log_check:
         is_log_check = False
         for line in unko_log:
