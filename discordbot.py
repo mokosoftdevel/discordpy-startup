@@ -122,6 +122,7 @@ async def loop_second():
                 print("Channel is none")
                 is_log_check = True
                 return
+            print(now)
             print(channel)
             print(int(line[0]))
             msgs = []
