@@ -111,7 +111,7 @@ async def loop_second():
     global unko_log
     global is_log_check
     now = datetime.utcnow()
-    print(now)
+    #print(now)
     #print(bot)
     if is_log_check:
         is_log_check = False
@@ -131,7 +131,7 @@ async def loop_second():
                 print(td.seconds)
                 if td.seconds >= int(line[0]):
                     msgs.append(message)
-                    print(message.content)
+                    #print(message.content)
             try:
                 await channel.delete_messages(msgs)
             except (ClientException, Forbidden, NotFound, HTTPException) as e:
