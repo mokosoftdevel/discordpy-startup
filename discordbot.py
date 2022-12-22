@@ -128,10 +128,14 @@ async def loop_second():
                 td = now - message.created_at
                 #print(td.seconds)
                 if td.seconds >= int(line[0]):
-                    message.delete
-                    # print(message.content)
+                    try:
+                        message.delete
+                    except (Forbidden, NotFound, HTTPException) as e:
+                        print(e)
+
+                    print(message.content)
                     
-        is_log_check = True
+        is_log_check = False
 
 # loop_second.start()
 
