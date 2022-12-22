@@ -111,7 +111,7 @@ async def loop_second():
     global unko_log
     global is_log_check
     now = datetime.now()
-    #print(now)
+    print(now)
     #print(bot)
     if is_log_check:
         is_log_check = False
@@ -127,6 +127,7 @@ async def loop_second():
             async for message in channel.history(limit=100):
                 #print(message.content)
                 td = now - message.created_at
+                print(message.created_at)
                 print(td.seconds)
                 if td.seconds >= int(line[0]):
                     msgs.append(message)
