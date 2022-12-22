@@ -135,9 +135,9 @@ async def loop_second():
 
                     print(message.content)
                     
-        is_log_check = True
+        is_log_check = False
 
-# loop_second.start()
+loop_second.start()
 
 
 @bot.event
