@@ -125,18 +125,18 @@ async def loop_second():
                 print("Channel is none")
                 is_log_check = True
                 return
-            print(now)
-            print(channel)
-            print(int(line[0]))
+            #print(now)
+            #print(channel)
+            #print(int(line[0]))
             msgs = []
             async for message in channel.history(limit=100):
                 #print(message.content)
                 if now < message.created_at:
                     continue
                 td = now - message.created_at
-                print(message.content)
-                print(message.created_at)
-                print(td.seconds)
+                #print(message.content)
+                #print(message.created_at)
+                #print(td.seconds)
                 if td.seconds >= int(line[0]):
                     msgs.append(message)
                     #print(message.content)
