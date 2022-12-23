@@ -247,6 +247,7 @@ async def com_ai(ctx, *args):
     prompt = ""
     for item in args:
         prompt += item
+    print(prompt)
 
     openai.api_key = gpt_secret_key
     response = openai.Completion.create(
@@ -258,6 +259,7 @@ async def com_ai(ctx, *args):
         frequency_penalty=0.0,
         presence_penalty=0.0
     )
+    print(response)
     texts = ''.join([choice['text'] for choice in response.choices])
     print(texts)
     await ctx.send(texts)
