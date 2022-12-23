@@ -250,6 +250,7 @@ async def com_ai(ctx, *args):
     print(prompt)
 
     openai.api_key = gpt_secret_key
+    print(openai.api_key)
     response = openai.Completion.create(
         model='text-davinci-003',
         prompt=prompt,
