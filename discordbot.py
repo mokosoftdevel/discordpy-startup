@@ -16,7 +16,7 @@ import openai
 from dotenv import load_dotenv
 load_dotenv()
 
-gpt_secret_key = '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'
+gpt_secret_key = "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"
 
 bot = commands.Bot(command_prefix='うんこ')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -246,7 +246,7 @@ async def com_ai(ctx, *args):
 
     prompt = ""
     for item in args:
-        prompt += item
+        prompt += " " + item
     print(prompt)
 
     openai.api_key = gpt_secret_key
