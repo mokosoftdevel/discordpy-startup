@@ -11,9 +11,12 @@ from discord.ext import tasks
 import numpy as np
 import cv2
 import time
+import openai
 
 from dotenv import load_dotenv
 load_dotenv()
+
+gpt_secret_key = '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'
 
 bot = commands.Bot(command_prefix='うんこ')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -231,6 +234,33 @@ async def com_tabeyo(ctx):
     global unko_tabeyo
     mes = random.choice(unko_tabeyo)
     await ctx.send(f"{ctx.author.mention}"+' '+mes)
+
+
+@bot.command(aliases=['AI','ＡＩ'])
+async def com_ai(ctx, *args):
+    global gpt_secret_key
+
+    if len(args) <= 0:
+        await ctx.send('promptを指定してください')
+        return
+
+    prompt = ""
+    for item in args:
+        prompt += item
+
+    openai.api_key = gpt_secret_key
+    response = openai.Completion.create(
+        model='text-davinci-003',
+        prompt=prompt,
+        temperature=0,
+        max_tokens=1000,
+        top_p=1.0,
+        frequency_penalty=0.0,
+        presence_penalty=0.0
+    )
+    texts = ''.join([choice['text'] for choice in response.choices])
+    print(texts)
+    await ctx.send(texts)
 
 
 @bot.command(aliases=['画像'])
