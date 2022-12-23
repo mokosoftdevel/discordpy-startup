@@ -16,7 +16,7 @@ import openai
 from dotenv import load_dotenv
 load_dotenv()
 
-gpt_secret_key = "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"
+gpt_secret_key = os.environ['OPEN_AI_SECRET']
 
 bot = commands.Bot(command_prefix='うんこ')
 token = os.environ['DISCORD_BOT_TOKEN']
