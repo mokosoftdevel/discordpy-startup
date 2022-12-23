@@ -246,7 +246,7 @@ async def com_ai(ctx, *args):
 
     prompt = ""
     for item in args:
-        prompt += " " + item
+        prompt += item + "\n"
     print(prompt)
 
     openai.api_key = gpt_secret_key
