@@ -144,6 +144,7 @@ async def loop_second():
                 await channel.delete_messages(msgs)
             except (ClientException, Forbidden, NotFound, HTTPException) as e:
                 print(e)
+                is_log_check = True
 
                     
                     
