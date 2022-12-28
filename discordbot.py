@@ -266,6 +266,35 @@ async def com_ai(ctx, *args):
     print(texts)
     await ctx.send(texts)
 
+@bot.command(aliases=['コードAI','コードＡＩ'])
+async def com_ai(ctx, *args):
+    global gpt_secret_key
+
+    if len(args) <= 0:
+        await ctx.send('promptを指定してください')
+        return
+
+    prompt = ""
+    for item in args:
+        prompt += item + "\n"
+    print(prompt)
+
+    openai.api_key = gpt_secret_key
+    #print(openai.api_key)
+    response = openai.Completion.create(
+        model='code-davinci-002',
+        prompt=prompt,
+        temperature=0.3,
+        max_tokens=2000,
+        top_p=1.0,
+        frequency_penalty=0.0,
+        presence_penalty=0.0
+    )
+    print(response)
+    texts = ''.join([choice['text'] for choice in response.choices])
+    print(texts)
+    await ctx.send(texts)
+
 
 @bot.command(aliases=['画像'])
 async def com_image(ctx):
