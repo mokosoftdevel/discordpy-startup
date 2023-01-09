@@ -53,6 +53,9 @@ unko_omikuji = []
 unko_log = []
 is_log_check = False
 
+# 永続プロンプト
+unko_prompt = []
+
 
 
 # google spread sheet api 
@@ -236,6 +239,30 @@ async def com_tabeyo(ctx):
     mes = random.choice(unko_tabeyo)
     await ctx.send(f"{ctx.author.mention}"+' '+mes)
 
+@bot.command(aliases=['PromptAdd', 'PromptADD'])
+async def com_promptadd(ctx, *args):
+    global unko_prompt
+
+    for item in args:
+        unko_prompt.append(item)
+    await ctx.send("promptを追加しました")
+
+@bot.command(aliases=['PromptClean', 'PromptClear'])
+async def com_promptclear(ctx):
+    global unko_prompt
+    unko_prompt.clear()
+    await ctx.send("promptを初期化しました")
+
+@bot.command(aliases=['PromptCheck'])
+async def com_promptcheck(ctx):
+    global unko_prompt
+
+    prompt = ""
+    for item in unko_prompt:
+        prompt = item + "\n"
+    await ctx.send("現在のpromptは以下の通りです\n"+prompt)
+
+
 
 @bot.command(aliases=['AI','ＡＩ'])
 async def com_ai(ctx, *args):
@@ -245,10 +272,15 @@ async def com_ai(ctx, *args):
         await ctx.send('promptを指定してください')
         return
 
+    com_prompt = ""
+    for item in unko_prompt:
+        com_prompt = item + "\n"
+
     prompt = ""
     for item in args:
         prompt += item + "\n"
     print(prompt)
+    prompt = com_prompt + "\n" + prompt
 
     openai.api_key = gpt_secret_key
     #print(openai.api_key)
