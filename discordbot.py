@@ -259,7 +259,7 @@ async def com_promptcheck(ctx):
 
     prompt = ""
     for item in unko_prompt:
-        prompt = item + "\n"
+        prompt += item + "\n"
     await ctx.send("現在のpromptは以下の通りです\n"+prompt)
 
 
@@ -274,7 +274,7 @@ async def com_ai(ctx, *args):
 
     com_prompt = ""
     for item in unko_prompt:
-        com_prompt = item + "\n"
+        com_prompt += item + "\n"
 
     prompt = ""
     for item in args:
