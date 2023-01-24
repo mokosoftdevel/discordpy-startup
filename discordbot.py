@@ -277,6 +277,10 @@ async def com_ai(ctx, *args):
     user_name = ctx.author.display_name
     print(user_name)
 
+    prompt = ""
+    for item in args:
+        prompt += item + "\n"
+
     prolist = ""
     if user_name in unko_dict:
         # リストを取得し追加する
@@ -293,9 +297,7 @@ async def com_ai(ctx, *args):
     for item in unko_prompt:
         com_prompt += item + "\n"
 
-    prompt = ""
-    for item in args:
-        prompt += item + "\n"
+    
     #print(prompt)
     prompt = com_prompt + "\n" + prolist
     print(prompt)
