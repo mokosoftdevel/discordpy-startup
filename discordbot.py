@@ -24,6 +24,7 @@ token = os.environ['DISCORD_BOT_TOKEN']
 
 # うんこの受け答えlist
 unko_messages = []
+unko_dict = {} # ユーザー別やりとりリスト
 
 # ねむいlist
 unko_nemui = []
@@ -267,10 +268,22 @@ async def com_promptcheck(ctx):
 @bot.command(aliases=['AI','ＡＩ'])
 async def com_ai(ctx, *args):
     global gpt_secret_key
+    global unko_dict
 
     if len(args) <= 0:
         await ctx.send('promptを指定してください')
         return
+    
+    user_name = ctx.author.display_name
+
+    prolist = ""
+    if user_name in unko_dict:
+        # リストを取得し追加する
+        prolist = unko_dict[user_name]
+        prolist += "\n" + "You: " + prompt + "\n" + "AI: "
+    else:
+        prolist = "You: " + prompt + "\n" + "AI: "
+
 
     com_prompt = ""
     for item in unko_prompt:
@@ -280,7 +293,7 @@ async def com_ai(ctx, *args):
     for item in args:
         prompt += item + "\n"
     print(prompt)
-    prompt = com_prompt + "\n" + prompt
+    prompt = com_prompt + "\n" + prolist
 
     openai.api_key = gpt_secret_key
     #print(openai.api_key)
@@ -296,6 +309,10 @@ async def com_ai(ctx, *args):
     print(response)
     texts = ''.join([choice['text'] for choice in response.choices])
     print(texts)
+
+    prolist += texts
+    unko_dict[user_name] = prolist
+
     await ctx.send(texts)
 
 
