@@ -280,6 +280,7 @@ async def com_ai(ctx, *args):
     prompt = ""
     for item in args:
         prompt += item + "\n"
+    prompt = prompt.rstrip()
 
     prolist = ""
     if user_name in unko_dict:
