@@ -288,6 +288,12 @@ async def com_ai(ctx, *args):
         # リストを取得し追加する
         print("1")
         prolist = unko_dict[user_name]
+
+        prolist_split = prolist.split("\n")
+        if len(prolist_split) > 16:
+            prolist_split = prolist_split[2:]
+            prolist = "\n".join(prolist_split)
+
         prolist += "\n" + messanger_name + ": " + prompt + "\n" + "AI: "
     else:
         print("2")
@@ -310,7 +316,7 @@ async def com_ai(ctx, *args):
         model='text-davinci-003',
         prompt=prompt,
         temperature=0.3,
-        max_tokens=2000,
+        max_tokens=2048,
         top_p=1.0,
         frequency_penalty=0.0,
         presence_penalty=0.0
@@ -323,6 +329,11 @@ async def com_ai(ctx, *args):
     unko_dict[user_name] = prolist
 
     await ctx.send(texts)
+
+@bot.command(aliases=['UserClear'])
+async def com_ai_user_clear(ctx):
+    global unko_dict
+    user_name = ctx.author.display_name
 
 
 @bot.command(aliases=['画像'])
