@@ -275,15 +275,17 @@ async def com_ai(ctx, *args):
         return
     
     user_name = ctx.author.display_name
+    print(user_name)
 
     prolist = ""
     if user_name in unko_dict:
         # リストを取得し追加する
         prolist = unko_dict[user_name]
-        prolist += "\n" + "You: " + prompt + "\n" + "AI: "
+        prolist += "\n" + user_name + ": " + prompt + "\n" + "AI: "
     else:
-        prolist = "You: " + prompt + "\n" + "AI: "
+        prolist = user_name + ": " + prompt + "\n" + "AI: "
 
+    
 
     com_prompt = ""
     for item in unko_prompt:
@@ -292,8 +294,9 @@ async def com_ai(ctx, *args):
     prompt = ""
     for item in args:
         prompt += item + "\n"
-    print(prompt)
+    #print(prompt)
     prompt = com_prompt + "\n" + prolist
+    print(prompt)
 
     openai.api_key = gpt_secret_key
     #print(openai.api_key)
