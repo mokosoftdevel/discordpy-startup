@@ -280,9 +280,11 @@ async def com_ai(ctx, *args):
     prolist = ""
     if user_name in unko_dict:
         # リストを取得し追加する
+        print("1")
         prolist = unko_dict[user_name]
         prolist += "\n" + user_name + ": " + prompt + "\n" + "AI: "
     else:
+        print("2")
         prolist = user_name + ": " + prompt + "\n" + "AI: "
 
     print(prolist)
