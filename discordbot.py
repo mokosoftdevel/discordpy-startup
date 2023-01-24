@@ -285,7 +285,7 @@ async def com_ai(ctx, *args):
     else:
         prolist = user_name + ": " + prompt + "\n" + "AI: "
 
-    
+    print(prolist)
 
     com_prompt = ""
     for item in unko_prompt:
