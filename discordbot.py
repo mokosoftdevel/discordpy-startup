@@ -290,7 +290,7 @@ async def com_ai(ctx, *args):
         prolist = unko_dict[user_name]
 
         prolist_split = prolist.split("\n")
-        if len(prolist_split) > 20:
+        if len(prolist_split) > 14:
             prolist_split = prolist_split[2:]
             prolist = "\n".join(prolist_split)
 
