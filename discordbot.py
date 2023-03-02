@@ -318,9 +318,9 @@ async def com_ai(ctx, *args):
     openai.organization = gpt_orgnize
     openai.api_key = gpt_secret_key
 
-    completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Hello world!"}])
-    print("return")
-    print(completion)
+    #completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Hello world!"}])
+    #print("return")
+    #print(completion)
 
     #print(openai.api_key)
     response = openai.Completion.create(
@@ -336,7 +336,7 @@ async def com_ai(ctx, *args):
         #frequency_penalty=0.0,
         #presence_penalty=0.0
     )
-    #print(response)
+    print(response)
     #texts = ''.join([choice['text'] for choice in response.choices])
     texts = response.choices[0].message.content
     print(texts)
