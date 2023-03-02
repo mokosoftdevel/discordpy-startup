@@ -299,7 +299,7 @@ async def com_ai(ctx, *args):
         print("2")
         prolist = messanger_name + ": " + prompt + "\n" + "AI: "
 
-    print(prolist)
+    #print(prolist)
 
     com_prompt = ""
     for item in unko_prompt:
@@ -318,11 +318,12 @@ async def com_ai(ctx, *args):
         messages = [
             {"role": "user", "content": prompt}
         ],
-        temperature=0.3,
-        max_tokens=2048,
-        top_p=1.0,
-        frequency_penalty=0.0,
-        presence_penalty=0.0
+        temperature=1
+        #temperature=0.3,
+        #max_tokens=2048,
+        #top_p=1.0,
+        #frequency_penalty=0.0,
+        #presence_penalty=0.0
     )
     print(response)
     #texts = ''.join([choice['text'] for choice in response.choices])
