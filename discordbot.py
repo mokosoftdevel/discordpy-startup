@@ -17,6 +17,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 gpt_secret_key = os.environ['OPEN_AI_SECRET']
+gpt_orgnize = os.environ['OPEN_AI_ORGNIZE']
 
 bot = commands.Bot(command_prefix='うんこ')
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -268,6 +269,7 @@ async def com_promptcheck(ctx):
 @bot.command(aliases=['AI','ＡＩ'])
 async def com_ai(ctx, *args):
     global gpt_secret_key
+    global gpt_orgnize
     global unko_dict
 
     if len(args) <= 0:
@@ -310,6 +312,7 @@ async def com_ai(ctx, *args):
     #prompt = com_prompt + "\n" + prolist
     print("prompt: "+ prompt)
 
+    openai.organization = gpt_orgnize
     openai.api_key = gpt_secret_key
     #print(openai.api_key)
     response = openai.Completion.create(
