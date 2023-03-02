@@ -323,7 +323,7 @@ async def com_ai(ctx, *args):
     #print(completion)
 
     #print(openai.api_key)
-    response = openai.Completion.create(
+    response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         # prompt=prompt,
         messages = [
