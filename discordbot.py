@@ -307,14 +307,17 @@ async def com_ai(ctx, *args):
 
     
     #print(prompt)
-    prompt = com_prompt + "\n" + prolist
+    #prompt = com_prompt + "\n" + prolist
     print(prompt)
 
     openai.api_key = gpt_secret_key
     #print(openai.api_key)
     response = openai.Completion.create(
-        model='text-davinci-003',
-        prompt=prompt,
+        model='gpt-3.5-turbo',
+        # prompt=prompt,
+        messages = [
+            {"role": "user", "content": prompt}
+        ],
         temperature=0.3,
         max_tokens=2048,
         top_p=1.0,
@@ -322,7 +325,8 @@ async def com_ai(ctx, *args):
         presence_penalty=0.0
     )
     print(response)
-    texts = ''.join([choice['text'] for choice in response.choices])
+    #texts = ''.join([choice['text'] for choice in response.choices])
+    texts = response["coices"][0]["message"]["content"]
     print(texts)
 
     prolist += texts
