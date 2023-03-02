@@ -320,17 +320,17 @@ async def com_ai(ctx, *args):
         # prompt=prompt,
         messages = [
             {"role": "user", "content": prompt}
-        ],
-        temperature=1
+        ]
+        #temperature=1
         #temperature=0.3,
         #max_tokens=2048,
         #top_p=1.0,
         #frequency_penalty=0.0,
         #presence_penalty=0.0
     )
-    print(response)
+    #print(response)
     #texts = ''.join([choice['text'] for choice in response.choices])
-    texts = response.choices[0].message.content;
+    texts = response.choices[0].message.content
     print(texts)
 
     prolist += texts
