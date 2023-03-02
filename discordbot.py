@@ -314,6 +314,10 @@ async def com_ai(ctx, *args):
 
     openai.organization = gpt_orgnize
     openai.api_key = gpt_secret_key
+
+    completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Hello world!"}])
+    print(completion)
+
     #print(openai.api_key)
     response = openai.Completion.create(
         model="gpt-3.5-turbo",
