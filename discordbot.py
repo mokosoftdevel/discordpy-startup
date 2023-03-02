@@ -312,10 +312,14 @@ async def com_ai(ctx, *args):
     #prompt = com_prompt + "\n" + prolist
     print("prompt: "+ prompt)
 
+    print("org:"+gpt_orgnize)
+    print("key:"+gpt_secret_key)
+
     openai.organization = gpt_orgnize
     openai.api_key = gpt_secret_key
 
     completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Hello world!"}])
+    print("return")
     print(completion)
 
     #print(openai.api_key)
