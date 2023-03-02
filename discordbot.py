@@ -313,7 +313,7 @@ async def com_ai(ctx, *args):
     openai.api_key = gpt_secret_key
     #print(openai.api_key)
     response = openai.Completion.create(
-        model='gpt-3.5-turbo',
+        model="gpt-3.5-turbo",
         # prompt=prompt,
         messages = [
             {"role": "user", "content": prompt}
@@ -327,7 +327,7 @@ async def com_ai(ctx, *args):
     )
     print(response)
     #texts = ''.join([choice['text'] for choice in response.choices])
-    texts = response["choice"][0]["message"]["content"]
+    texts = response.choices[0].message.content;
     print(texts)
 
     prolist += texts
