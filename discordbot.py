@@ -142,7 +142,7 @@ async def loop_second():
                 #print(message.content)
                 #print(message.created_at)
                 #print(td.seconds)
-                if td.seconds >= int(line[0]):
+                if td.seconds >= int(line[0]) and td.days < 14:
                     msgs.append(message)
                     #print(message.content)
             try:
