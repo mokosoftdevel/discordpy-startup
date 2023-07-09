@@ -324,7 +324,7 @@ async def com_ai(ctx, *args):
 
     #print(openai.api_key)
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-3.5-turbo",
         # prompt=prompt,
         messages = [
             {"role": "user", "content": prompt}
