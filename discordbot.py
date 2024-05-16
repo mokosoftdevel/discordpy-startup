@@ -417,7 +417,7 @@ async def com_image_create(ctx, *args):
 
         # 保存するファイル名を指定
         filename = 'generated_image.png'
-        response = requests.get(url)
+        response = requests.get(image_url)
         if response.status_code == 200:
             with open(filename, 'wb') as f:
                 f.write(response.content)
