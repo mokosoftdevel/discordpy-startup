@@ -12,6 +12,7 @@ import numpy as np
 import cv2
 import time
 from openai import OpenAI
+import logging
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -315,13 +316,15 @@ async def com_ai(ctx, *args):
     print("org:"+gpt_orgnize)
     print("key:"+gpt_secret_key)
 
-    client = OpenAI(api_key=gpt_secret_key)
-    completion = client.chat.completions.create(
-        model='gpt-4o',
-        messages = [
-            {"role": "user", "content": prompt}
-        ]
-    )
+    try:
+
+        client = OpenAI(api_key=gpt_secret_key)
+        completion = client.chat.completions.create(
+            model='gpt-4o',
+            messages = [
+                {"role": "user", "content": prompt}
+            ]
+        )
 
 
 
@@ -342,13 +345,17 @@ async def com_ai(ctx, *args):
     #)
     #print(completion)
     #texts = response.choices[0].message.content
-    texts = completion.choices[0].message.content
-    print(texts)
+        texts = completion.choices[0].message.content
+        print(texts)
 
-    prolist += texts
-    unko_dict[user_name] = prolist
+        prolist += texts
+        unko_dict[user_name] = prolist
 
-    await ctx.send(texts)
+        await ctx.send(texts)
+
+    except Exception as e:
+        logging.error(f'an error occured: {e}')
+        await ctx.send('era-gahasseisimasita.notihoodosaisikoisuteekudasai')
 
 @bot.command(aliases=['UserClear'])
 async def com_ai_user_clear(ctx):
