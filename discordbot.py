@@ -11,7 +11,7 @@ from discord.ext import tasks
 import numpy as np
 import cv2
 import time
-import openai
+from openai import OpenAI
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -315,30 +315,34 @@ async def com_ai(ctx, *args):
     print("org:"+gpt_orgnize)
     print("key:"+gpt_secret_key)
 
-    openai.organization = gpt_orgnize
-    openai.api_key = gpt_secret_key
-
-    #completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": "Hello world!"}])
-    #print("return")
-    #print(completion)
-
-    #print(openai.api_key)
-    response = openai.ChatCompletion.create(
-        model="gpt-4o",
-        # prompt=prompt,
+    client = OpenAI(api_key=gpt_secret_key)
+    completion = client.chat.completions.create(
+        model='gpt-4o',
         messages = [
             {"role": "user", "content": prompt}
         ]
+    )
+
+
+
+    #openai.organization = gpt_orgnize
+    #openai.api_key = gpt_secret_key
+
+    #response = openai.ChatCompletion.create(
+    #    model="gpt-4o",
+    #    messages = [
+    #        {"role": "user", "content": prompt}
+    #    ]
         #temperature=1
         #temperature=0.3,
         #max_tokens=2048,
         #top_p=1.0,
         #frequency_penalty=0.0,
         #presence_penalty=0.0
-    )
-    print(response)
-    #texts = ''.join([choice['text'] for choice in response.choices])
-    texts = response.choices[0].message.content
+    #)
+    print(completion)
+    #texts = response.choices[0].message.content
+    texts = completion.choices[0].text
     print(texts)
 
     prolist += texts
