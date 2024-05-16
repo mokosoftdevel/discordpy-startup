@@ -378,14 +378,22 @@ async def com_ai_user_clear(ctx):
     global unko_dict
     user_name = ctx.author.display_name
 
-def save_image_from_url(url, filename):
+async def save_image_from_url(url, filename):
     response = requests.get(url)
     if response.status_code == 200:
         with open(filename, 'wb') as f:
             f.write(response.content)
 
 @bot.command(aliases=['画像生成'])
-async def com_image_create(ctx):
+async def com_image_create(ctx, *args):
+
+    global gpt_secret_key
+    global gpt_orgnize
+    global unko_dict
+
+    if len(args) <= 0:
+        await ctx.send('promptを指定してください')
+        return
 
     prompt = ""
     for item in args:
