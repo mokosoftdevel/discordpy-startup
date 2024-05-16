@@ -391,6 +391,7 @@ async def com_image_create(ctx):
     for item in args:
         prompt += item + "\n"
     prompt = "今から指示する内容の画像を作って。" + prompt.rstrip()
+    print(prompt)
     
     try:
         client = OpenAI(api_key=gpt_secret_key)
