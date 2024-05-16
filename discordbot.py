@@ -13,6 +13,7 @@ import cv2
 import time
 from openai import OpenAI
 import logging
+import requests
 
 from dotenv import load_dotenv
 load_dotenv()
