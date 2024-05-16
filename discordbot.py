@@ -378,6 +378,38 @@ async def com_ai_user_clear(ctx):
     global unko_dict
     user_name = ctx.author.display_name
 
+def save_image_from_url(url, filename):
+    response = requests.get(url)
+    if response.status_code == 200:
+        with open(filename, 'wb') as f:
+            f.write(response.content)
+
+@bot.command(aliases=['画像生成'])
+async def com_image_create(ctx):
+
+    prompt = ""
+    for item in args:
+        prompt += item + "\n"
+    prompt = "今から指示する内容の画像を作って。" + prompt.rstrip()
+    
+    client = OpenAI(api_key=gpt_secret_key)
+    response = client.images.generate(
+        model="dall-e-3",
+        prompt=prompt,
+        size="1024x1024",
+        quality="standard",
+        n=1,
+    )
+
+    image_url = response.data[0].url
+
+    # 保存するファイル名を指定
+    filename = 'generated_image.png'
+    save_image_from_url(image_url, filename)
+
+    # Discordに送信
+    await channel.send(file=discord.File(filename))
+
 
 @bot.command(aliases=['画像'])
 async def com_image(ctx):
