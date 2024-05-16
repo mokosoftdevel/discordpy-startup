@@ -416,7 +416,11 @@ async def com_image_create(ctx, *args):
 
         # 保存するファイル名を指定
         filename = 'generated_image.png'
-        save_image_from_url(image_url, filename)
+        response = requests.get(url)
+        if response.status_code == 200:
+            with open(filename, 'wb') as f:
+                f.write(response.content)
+        #save_image_from_url(image_url, filename)
 
         # Discordに送信
         await ctx.send(file=discord.File(filename))
