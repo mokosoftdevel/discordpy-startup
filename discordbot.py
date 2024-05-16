@@ -116,7 +116,7 @@ async def loop():
             model='gpt-4o',
             messages = [
                 {"role": "system", "content": "ここは日本人のクリエイターがあつまるdiscordチャットです。交流のための場所で、あなたはそこではbotとして常駐しています。話し方は日本の関西弁です。クリエイターのための最近の話題や面白い話題を提供してあげたり雑学を提供してあげてください。"},
-                {"role": "user", "content": "{date_str}のなにか面白い話題はない？"}
+                {"role": "user", "content": f"{date_str}のなにか面白い話題はない？"}
             ]
         )
         channel = bot.get_channel(738973128645935104)
