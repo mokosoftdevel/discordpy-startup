@@ -419,7 +419,7 @@ async def com_image_create(ctx, *args):
         save_image_from_url(image_url, filename)
 
         # Discordに送信
-        await channel.send(file=discord.File(filename))
+        await ctx.send(file=discord.File(filename))
 
     except Exception as e:
         logging.error(f'an error occured: {e}')
