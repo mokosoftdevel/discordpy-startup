@@ -340,9 +340,9 @@ async def com_ai(ctx, *args):
         #frequency_penalty=0.0,
         #presence_penalty=0.0
     #)
-    print(completion)
+    #print(completion)
     #texts = response.choices[0].message.content
-    texts = completion.choices[0].text
+    texts = completion.choices[0].message.content
     print(texts)
 
     prolist += texts
