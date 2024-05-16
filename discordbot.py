@@ -108,6 +108,22 @@ async def loop():
                 await com_deka_slot(channel)
     if now == "00:00": 
         await func_all_reload()
+    if now == "08:00" or now == "12:00" or now == "18:00":
+
+        date_str = datetime.now(JST).strftime('%m月%d日 %H時')
+        client = OpenAI(api_key=gpt_secret_key)
+        completion = client.chat.completions.create(
+            model='gpt-4o',
+            messages = [
+                {"role": "system", "content": "ここは日本人のクリエイターがあつまるdiscordチャットです。交流のための場所で、あなたはそこではbotとして常駐しています。話し方は日本の関西弁です。クリエイターのための最近の話題や面白い話題を提供してあげたり雑学を提供してあげてください。"},
+                {"role": "user", "content": "{date_str}のなにか面白い話題はない？"}
+            ]
+        )
+        channel = bot.get_channel(738973128645935104)
+        await channel.send(completion.choices[0].message.content)
+
+
+
     #if now == "13:45":
     #    channel = bot.get_channel(738973128645935104)
     #    ato = datetime(2022,11,27) - datetime.now()
