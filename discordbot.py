@@ -337,7 +337,7 @@ async def com_ai(ctx, *args):
 
         client = OpenAI(api_key=gpt_secret_key)
         completion = client.chat.completions.create(
-            model='gpt-4o',
+            model='gpt-4o-mini',
             messages = [
                 {"role": "user", "content": prompt}
             ]
