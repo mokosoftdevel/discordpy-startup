@@ -337,7 +337,7 @@ async def com_ai(ctx, *args):
 
         client = OpenAI(api_key=gpt_secret_key)
         completion = client.chat.completions.create(
-            model='gpt-4o-mini',
+            model='gpt-4o',
             messages = [
                 {"role": "user", "content": prompt}
             ]
@@ -372,7 +372,7 @@ async def com_ai(ctx, *args):
 
     except Exception as e:
         logging.error(f'an error occured: {e}')
-        await ctx.send('era-gahasseisimasita.notihoodosaisikoisuteekudasai')
+        await ctx.send('era-gahasseisimasita.notihoodosaisikoisuteekudasai {e}')
 
 @bot.command(aliases=['UserClear'])
 async def com_ai_user_clear(ctx):
